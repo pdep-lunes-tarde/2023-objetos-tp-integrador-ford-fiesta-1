@@ -10,6 +10,7 @@ object tpIntegrador
   		game.boardGround("./imagenes/fondo.jpg")
   		game.addVisualCharacter(bombardero)
   		game.addVisualCharacter(golem)
+  		game.addVisualCharacter(magnet)
 		game.start()
 	}
 }
@@ -29,4 +30,12 @@ object golem
   
   	method image() = "./imagenes/golem.png"
   	method position() = new Position(x = 10, y = 10)
+}
+object magnet
+{
+	var property personajePrincipal = bombardero
+ 	 var property position = game.origin()
+  
+  	method image() = "./imagenes/magnet.png"
+  	method position() = new Position(x = 0, y = 10)
 }
