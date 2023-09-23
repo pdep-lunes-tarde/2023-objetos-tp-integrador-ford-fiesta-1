@@ -1,5 +1,7 @@
+import wollok.game.*
 import tp.*
 
-program juego {
+program juego 
+{
 	tpIntegrador.jugar()
 }

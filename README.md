@@ -1,8 +1,17 @@
 # Grupo
 
-Nombre: **COMPLETAR ACA**
+Nombre: Ford~Fiesta
 
-Integrantes: **COMPLETAR ACA**
+Integrantes: 
+
+- Legajo: 2095002
+- Nombre: Tobias Duren
+
+- Legajo: 2028244
+- Nombre: Jose Miguel Paz Portilla
+
+- Legajo: 2036071 
+- Nombre: Lucas Ezequiel Fernandez Fiel
 
 # Consigna TP Integrador
 
