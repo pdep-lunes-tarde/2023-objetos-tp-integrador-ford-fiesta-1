@@ -3,5 +3,24 @@ import tp.*
 
 program juego 
 {
-	tpIntegrador.jugar()
+	game.title("Bomber Man")
+	game.height(11)
+  	game.width(11)
+  	game.boardGround("./imagenes/fondo.jpg")
+  	game.addVisualCharacter(bombardero)
+	game.say(bombardero, "Vidas: " + bombardero.cuantasVidas())
+	
+	const rivales = [new Rival(position = game.at(3,3)), new Rival(position = game.at(4,3))]
+	
+	rivales.forEach {
+		rival =>
+		game.addVisual(rival)
+		game.whenCollideDo(rival, {personajePrincipal =>
+			personajePrincipal.colisionarCon(rival)
+			game.say(bombardero, "Vidas: " + bombardero.cuantasVidas())
+		})
+		
+		game.onTick(1.randomUpTo(5) * 500, "mover", {rival.buscarA(bombardero)})
+	}
+	game.start()
 }
