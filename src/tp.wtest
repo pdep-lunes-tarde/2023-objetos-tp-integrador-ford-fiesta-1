@@ -1,4 +1,4 @@
-import tp.*
+import bomberman.*
 
 test "Test de ejemplo" {
 		assert.equals(4, 2 + 2)
