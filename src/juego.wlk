@@ -1,17 +1,19 @@
 import wollok.game.*
 import bomberman.*
 import cajas.*
-
-//Para iniciar juego poner en consola juego.jugar()
+import rivales.*
 
 object menu{
 	var property image = "./imagenes/menu.png"
 	var property position = game.origin()
 }
 
+
+
 object juego {
 	
 	var estaMenu = true
+	var spawnRivales = false
 	
 	method jugar(){
 		game.title("Bomberman")
@@ -32,6 +34,25 @@ object juego {
 				self.jugador1()
 				self.jugador2()
 			}
+			
+			if (!spawnRivales) {
+                self.inicializarRivales()
+                spawnRivales = true
+            }
+	}
+	
+	method inicializarRivales(){
+		if(!game.hasVisual(menu)){
+		const rivales = [new Rival(position = game.at(5,5)),
+						new Rival(position = game.at(7,5)),
+						new Rival(position = game.at(5,7)),
+						new Rival(position = game.at(7,7))
+		]
+		rivales.forEach{rival => 
+			game.addVisual(rival)
+			game.onTick(1000, "movimiento", {rival.movimientoAleatorio()})
+			}
+		}
 	}
 	
 	method jugador1(){
@@ -41,6 +62,7 @@ object juego {
 		keyboard.d().onPressDo({jugador1.irDerecha()})
 		game.addVisual(jugador1)
 		keyboard.space().onPressDo({jugador1.ponerBomba()})
+		game.onCollideDo(jugador1,{elemento => elemento.matar(jugador1)})
 	}
 	
 	method jugador2(){
@@ -51,6 +73,7 @@ object juego {
 		game.addVisual(jugador2)
 		jugador2.moverse(game.at(13,13))
 		keyboard.shift().onPressDo({jugador2.ponerBomba()})
+		game.onCollideDo(jugador2,{elemento => elemento.matar(jugador2)})
 	}
 	
 }
@@ -98,8 +121,9 @@ object zonaDeJuego{
 	}
 	
 	method generarCajas(){
-		var posDondeNoPuedeAparecer = [	game.at(1,1), game.at(1,2),game.at(2,1),		//Entorno de jugador1
-										game.at(13,13), game.at(13,12), game.at(12,13)]	//Entorno de jugador2
+		var posDondeNoPuedeAparecer = [	game.at(1,1), game.at(1,2),game.at(2,1),				//Entorno de jugador1
+										game.at(13,13), game.at(13,12), game.at(12,13),			//Entorno de jugador2
+										game.at(5,5), game.at(5,7), game.at(7,5), game.at(7,7)]	//Posicion de enemigos
 		14.times{
 			i => 14.times{
 				j => var probDeAparecer = 1.randomUpTo(10)

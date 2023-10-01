@@ -43,6 +43,7 @@ class Bombardero
 		game.removeVisual(self)
 	}
 	
+	
 	method image()
 	
 }

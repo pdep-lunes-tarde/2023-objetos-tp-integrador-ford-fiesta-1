@@ -27,19 +27,25 @@ class Bomba
 	}
 	
 	method aparecerFuego(){
-		//fuegos.add(position)
+		fuegos.add(position)
 		const fuego = new Fuego(position = position)
 		fuego.generarFuego()
 	}
+	
+	method matar(alguien){}
 	
 }
 
 class Fuego{
 	var property position
-	var property imgage = "./imagenes/fuego.png"
+	var property image = "./imagenes/fuego.png"
 	
 	method generarFuego(){
 		game.addVisual(self)
 		game.schedule(300, {game.removeVisual(self)})
+	}
+	
+	method matar(jugador){
+		jugador.muere()
 	}
 }
