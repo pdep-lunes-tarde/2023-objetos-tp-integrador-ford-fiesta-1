@@ -1,5 +1,6 @@
 import wollok.game.*
 import juego.*
+import cajas.*
 
 class Bomba
 {
@@ -32,6 +33,8 @@ class Bomba
 	}
 	
 	method matar(alguien){}
+	method muere(){}
+	method efecto(jugador){}
 	
 }
 
@@ -43,19 +46,31 @@ class Fuego{
 	method generarFuego(){
 		game.addVisual(self)
 		game.schedule(300, {game.removeVisual(self)})
+		if(tamanio > 0)
+			self.expandirse()
+		game.onCollideDo(self, {caja => caja.muere() zonaDeJuego.sacarCajaEn(position)})
 	}
 	
 	method matar(jugador){
 		jugador.muere()
 	}
 	
-	method puedeExandirse(posicion){
+	method puedeExpandirse(posicion){
 		if(zonaDeJuego.sePuedeRomper(posicion))
 			position = posicion
 	}
 	
 	method expandirse(){
+		const direcciones = [position.up(1), position.down(1), position.left(1), position.right(1)]
 		
+		direcciones.forEach{
+			direccion => if(zonaDeJuego.sePuedeRomper(direccion)){
+				var otroFuego = new Fuego(position = direccion, tamanio = tamanio -1)
+				otroFuego.generarFuego()
+			}
+		}
 	}
 	
+	method muere(){}
+	method efecto(jugador){}
 }

@@ -4,8 +4,9 @@ import juego.*
 
 class Bombardero
 {
+	var vidas = 3
 	var property position = game.at(1,1)
-	var capacidadDeBombas = 1
+	var capacidadDeBombas = 3
 	var bombas = []
 	var tamanioDeBomba = 1
 	
@@ -46,5 +47,6 @@ class Bombardero
 	
 	
 	method image()
+	method vidaExtra(){vidas++}
 	
 }

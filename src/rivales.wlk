@@ -1,4 +1,5 @@
 import juego.*
+import wollok.game.*
 
 class Rival {
 	var property position
@@ -18,5 +19,11 @@ class Rival {
     method matar(jugador){
 		jugador.muere()
 	}
+	
+	method muere(){
+		game.removeVisual(self)
+	}
+	
+	method efecto(jugador){}
 
 }

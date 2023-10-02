@@ -63,6 +63,7 @@ object juego {
 		game.addVisual(jugador1)
 		keyboard.space().onPressDo({jugador1.ponerBomba()})
 		game.onCollideDo(jugador1,{elemento => elemento.matar(jugador1)})
+		game.onCollideDo(jugador1,{powerUp => powerUp.efecto(jugador1)})
 	}
 	
 	method jugador2(){
@@ -74,6 +75,7 @@ object juego {
 		jugador2.moverse(game.at(13,13))
 		keyboard.shift().onPressDo({jugador2.ponerBomba()})
 		game.onCollideDo(jugador2,{elemento => elemento.matar(jugador2)})
+		game.onCollideDo(jugador2,{powerUp => powerUp.efecto(jugador2)})
 	}
 	
 }
@@ -133,6 +135,7 @@ object zonaDeJuego{
 		}
 		
 	}
+
 	
 	method generarCajas(){
 		var posDondeNoPuedeAparecer = [	game.at(1,1), game.at(1,2),game.at(2,1),				//Entorno de jugador1
