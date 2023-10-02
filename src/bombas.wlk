@@ -4,8 +4,8 @@ import juego.*
 class Bomba
 {
 	var property position
-	var fuegos = []
 	var bombardero
+	var tamanio
 	var property image = "./imagenes/bomb.png"
 	
 	method colocarBomba(){
@@ -27,8 +27,7 @@ class Bomba
 	}
 	
 	method aparecerFuego(){
-		fuegos.add(position)
-		const fuego = new Fuego(position = position)
+		const fuego = new Fuego(position = position, tamanio = tamanio)
 		fuego.generarFuego()
 	}
 	
@@ -38,6 +37,7 @@ class Bomba
 
 class Fuego{
 	var property position
+	var tamanio
 	var property image = "./imagenes/fuego.png"
 	
 	method generarFuego(){
@@ -48,4 +48,14 @@ class Fuego{
 	method matar(jugador){
 		jugador.muere()
 	}
+	
+	method puedeExandirse(posicion){
+		if(zonaDeJuego.sePuedeRomper(posicion))
+			position = posicion
+	}
+	
+	method expandirse(){
+		
+	}
+	
 }

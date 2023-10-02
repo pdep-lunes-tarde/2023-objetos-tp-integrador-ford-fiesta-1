@@ -89,6 +89,7 @@ object jugador2 inherits Bombardero{
 
 object zonaDeJuego{
 	var posicionesOcupadas = []
+	var posicionesOcupadasCajas = []
 	var posicionesNoRemovibles = []
 	
 	method agregarPos(posicion){
@@ -99,9 +100,22 @@ object zonaDeJuego{
 		posicionesOcupadas.remove(posicion)
 	}
 	
+	method agregarCajaEn(posicion){
+		posicionesOcupadasCajas.add(posicion)
+	}
+	
+	method sacarCajaEn(posicion){
+		posicionesOcupadasCajas.remove(posicion)
+	}
+	
+	method sePuedeRomper(posicion){
+		return !posicionesNoRemovibles.contains(posicion)
+	}
+	
 	method estaOcupada(posicion){
 		return posicionesOcupadas.contains(posicion) or 
-		posicionesNoRemovibles.contains(posicion)
+		posicionesNoRemovibles.contains(posicion) or
+		posicionesOcupadasCajas.contains(posicion)
 	}
 	
 	method generarMapa(){

@@ -7,6 +7,7 @@ class Bombardero
 	var property position = game.at(1,1)
 	var capacidadDeBombas = 1
 	var bombas = []
+	var tamanioDeBomba = 1
 	
 	method irArriba(){
 		self.moverse(position.up(1))
@@ -29,7 +30,7 @@ class Bombardero
 	
 	method ponerBomba(){
 		if(!zonaDeJuego.estaOcupada(position) && bombas.size() < capacidadDeBombas){
-			var bomba = new Bomba(position = position, bombardero = self)
+			var bomba = new Bomba(position = position, bombardero = self, tamanio = tamanioDeBomba)
 			bombas.add(bomba)
 			bomba.colocarBomba()
 		}

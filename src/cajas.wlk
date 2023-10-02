@@ -7,6 +7,6 @@ class Caja{
 	
 	method ponerCaja(){
 		game.addVisual(self)
-		zonaDeJuego.agregarPos(position)
+		zonaDeJuego.agregarCajaEn(position)
 	}
 }
