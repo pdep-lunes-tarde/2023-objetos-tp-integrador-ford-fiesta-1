@@ -64,6 +64,7 @@ object juego {
 		keyboard.space().onPressDo({jugador1.ponerBomba()})
 		game.onCollideDo(jugador1,{elemento => elemento.matar(jugador1)})
 		game.onCollideDo(jugador1,{powerUp => powerUp.efecto(jugador1)})
+		jugador1.mostrarVidas()
 	}
 	
 	method jugador2(){
@@ -80,13 +81,9 @@ object juego {
 	
 }
 
-object jugador1 inherits Bombardero{
-	override method image(){return "./imagenes/bomberman1.png"}
-}
+const jugador1 = new Bombardero(position = game.at(1,1), image = "./imagenes/bomberman1.png")
 
-object jugador2 inherits Bombardero{
-	override method image(){return "./imagenes/bomberman2.png"}
-}
+const jugador2 = new Bombardero(position = game.at(13,13), image = "./imagenes/bomberman2.png")
 
 
 object zonaDeJuego{

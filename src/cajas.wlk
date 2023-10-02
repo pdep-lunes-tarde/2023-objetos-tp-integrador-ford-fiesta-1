@@ -18,7 +18,7 @@ class Caja{
 	
 	method posibilidadDePowerUp(){
 		var probabilidad = 1.randomUpTo(10)
-		if(probabilidad < 10)
+		if(probabilidad < 3)
 			new UnaVidaExtra(position = position).aparecer()
 	}
 

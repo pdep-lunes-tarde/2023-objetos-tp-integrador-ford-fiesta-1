@@ -4,11 +4,13 @@ import juego.*
 
 class Bombardero
 {
-	var vidas = 3
-	var property position = game.at(1,1)
+	var property vidas = 3
+	var property position
+	var property image
 	var capacidadDeBombas = 3
 	var bombas = []
 	var tamanioDeBomba = 1
+	const posicionInicial = position
 	
 	method irArriba(){
 		self.moverse(position.up(1))
@@ -42,11 +44,15 @@ class Bombardero
 	}
 	
 	method muere(){
-		game.removeVisual(self)
+		if(self.vidas() > 0){
+			position = posicionInicial
+			vidas = vidas -1
+			}
+		else
+			game.removeVisual(self)
 	}
 	
 	
-	method image()
 	method vidaExtra(){vidas++}
 	
 }
