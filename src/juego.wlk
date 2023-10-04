@@ -61,6 +61,7 @@ object juego {
 		keyboard.a().onPressDo({jugador1.irIzquierda()})
 		keyboard.d().onPressDo({jugador1.irDerecha()})
 		game.addVisual(jugador1)
+		jugador1.muestraVida()
 		keyboard.space().onPressDo({jugador1.ponerBomba()})
 		game.onCollideDo(jugador1,{elemento => elemento.matar(jugador1)})
 		game.onCollideDo(jugador1,{powerUp => powerUp.efecto(jugador1)})
@@ -72,6 +73,7 @@ object juego {
 		keyboard.left().onPressDo({jugador2.irIzquierda()})
 		keyboard.right().onPressDo({jugador2.irDerecha()})
 		game.addVisual(jugador2)
+		jugador2.muestraVida()
 		jugador2.moverse(game.at(13,13))
 		keyboard.shift().onPressDo({jugador2.ponerBomba()})
 		game.onCollideDo(jugador2,{elemento => elemento.matar(jugador2)})
@@ -80,10 +82,26 @@ object juego {
 	
 }
 
-const jugador1 = new Bombardero(position = game.at(1,1), image = "./imagenes/bomberman1.png")
 
-const jugador2 = new Bombardero(position = game.at(13,13), image = "./imagenes/bomberman2.png")
+object jugador1 inherits Bombardero (position = game.at(1,1), image = "./imagenes/bomberman1.png"){
+	override method muestraVida(){
+		const vidasAMostrar = new MostrarVidas(
+			position = game.at(2,14),
+			image = "./imagenes/" + self.vidas().toString() + "corazones.png"
+		)
+		game.addVisual(vidasAMostrar)
+	}
+}
 
+object jugador2 inherits Bombardero (position = game.at(13,13), image = "./imagenes/bomberman2.png"){
+	override method muestraVida(){
+		const vidasAMostrar = new MostrarVidas(
+			position = game.at(9,14),
+			image = "./imagenes/" + self.vidas().toString() + "corazones.png"
+		)
+		game.addVisual(vidasAMostrar)
+	}
+}
 
 object zonaDeJuego{
 	var posicionesOcupadas = []

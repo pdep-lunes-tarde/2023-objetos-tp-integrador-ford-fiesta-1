@@ -11,6 +11,7 @@ class Bombardero
 	var property bombas = []
 	var property tamanioDeBomba = 1
 	const posicionInicial = position
+	var property estaVivo = true
 	
 	method irArriba(){
 		self.moverse(position.up(1))
@@ -32,7 +33,7 @@ class Bombardero
 	}
 	
 	method ponerBomba(){
-		if(!zonaDeJuego.estaOcupada(position) && bombas.size() < capacidadDeBombas){
+		if(!zonaDeJuego.estaOcupada(position) && bombas.size() < capacidadDeBombas && estaVivo){
 			var bomba = new Bomba(position = position, bombardero = self, tamanio = tamanioDeBomba)
 			bombas.add(bomba)
 			bomba.colocarBomba()
@@ -44,20 +45,31 @@ class Bombardero
 	}
 	
 	method muere(){
-		if(self.vidas() > 0){
-			position = posicionInicial
+		if(self.vidas() > 1){
 			vidas = vidas -1
+			position = posicionInicial
 			}
-		else
+		else{
+			vidas = 0
 			game.removeVisual(self)
+			estaVivo = false
+			}
+		self.muestraVida()
 	}
-	
 	
 	method vidaExtra(){
 		if(vidas < 5)
 			vidas++
+		self.muestraVida()
 	}
 	method bombaExtra(){capacidadDeBombas = 2}
 	method bombaMasGrande(){tamanioDeBomba = 2}
 	
+	method muestraVida()
+}
+
+
+class MostrarVidas{
+	var property position
+	var property image
 }
