@@ -8,12 +8,20 @@ object menu{
 	var property position = game.origin()
 }
 
-
+object menuganaste{
+	var property image = "./imagenes/menuganaste.png"
+	var property position = game.origin()
+}
 
 object juego {
 	
 	var estaMenu = true
 	var spawnRivales = false
+	const rivales = [new Rival(position = game.at(5,5)),
+						new Rival(position = game.at(7,5)),
+						new Rival(position = game.at(5,7)),
+						new Rival(position = game.at(7,7))
+		]
 	
 	method jugar(){
 		game.title("Bomberman")
@@ -43,11 +51,6 @@ object juego {
 	
 	method inicializarRivales(){
 		if(!game.hasVisual(menu)){
-		const rivales = [new Rival(position = game.at(5,5)),
-						new Rival(position = game.at(7,5)),
-						new Rival(position = game.at(5,7)),
-						new Rival(position = game.at(7,7))
-		]
 		rivales.forEach{rival => 
 			game.addVisual(rival)
 			game.onTick(1000, "movimiento", {rival.movimientoAleatorio()})
