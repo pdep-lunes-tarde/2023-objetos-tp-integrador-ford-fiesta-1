@@ -17,9 +17,16 @@ class Caja{
 	}
 	
 	method posibilidadDePowerUp(){
-		var probabilidad = 1.randomUpTo(10)
-		if(probabilidad < 3)
-			new UnaVidaExtra(position = position).aparecer()
+		const probabilidad = 1.randomUpTo(10)
+		const powerups = [
+						new UnaVidaExtra(position = position),
+						new UnaBombaExtra(position = position),
+						new BombaMasGrande(position = position)
+		]
+		if(probabilidad < 3){
+			const powerupAleatorio = powerups.anyOne()
+			powerupAleatorio.aparecer()
+			}
 	}
 
 	method efecto(jugador){}

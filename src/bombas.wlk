@@ -28,7 +28,10 @@ class Bomba
 	}
 	
 	method aparecerFuego(){
-		const fuego = new Fuego(position = position, tamanio = tamanio)
+		const fuego = new Fuego(position = position,
+								tamanio = tamanio,
+								direcciones = [position.down(1), position.up(1), position.left(1), position.right(1)]
+		)
 		fuego.generarFuego()
 	}
 	
@@ -42,10 +45,11 @@ class Fuego{
 	var property position
 	var tamanio
 	var property image = "./imagenes/fuego.png"
+	var property direcciones
 	
 	method generarFuego(){
 		game.addVisual(self)
-		game.schedule(300, {game.removeVisual(self)})
+		game.schedule(600, {game.removeVisual(self)})
 		if(tamanio > 0)
 			self.expandirse()
 		game.onCollideDo(self, {caja => caja.muere() zonaDeJuego.sacarCajaEn(position)})
@@ -61,11 +65,15 @@ class Fuego{
 	}
 	
 	method expandirse(){
-		const direcciones = [position.up(1), position.down(1), position.left(1), position.right(1)]
-		
 		direcciones.forEach{
-			direccion => if(zonaDeJuego.sePuedeRomper(direccion)){
-				var otroFuego = new Fuego(position = direccion, tamanio = tamanio -1)
+			direccion => 
+			const siguienteDireccion = game.at((2 * direccion.x()) - position.x(),(2 * direccion.y()) - position.y())
+			if(zonaDeJuego.sePuedeRomper(direccion)){
+				const otroFuego = new Fuego(
+								position = direccion,
+								tamanio = tamanio -1,
+								direcciones = [siguienteDireccion]
+				)
 				otroFuego.generarFuego()
 			}
 		}

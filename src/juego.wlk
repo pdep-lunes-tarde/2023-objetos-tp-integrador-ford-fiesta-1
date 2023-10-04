@@ -64,7 +64,6 @@ object juego {
 		keyboard.space().onPressDo({jugador1.ponerBomba()})
 		game.onCollideDo(jugador1,{elemento => elemento.matar(jugador1)})
 		game.onCollideDo(jugador1,{powerUp => powerUp.efecto(jugador1)})
-		jugador1.mostrarVidas()
 	}
 	
 	method jugador2(){
@@ -135,12 +134,12 @@ object zonaDeJuego{
 
 	
 	method generarCajas(){
-		var posDondeNoPuedeAparecer = [	game.at(1,1), game.at(1,2),game.at(2,1),				//Entorno de jugador1
+		const posDondeNoPuedeAparecer = [	game.at(1,1), game.at(1,2),game.at(2,1),				//Entorno de jugador1
 										game.at(13,13), game.at(13,12), game.at(12,13),			//Entorno de jugador2
 										game.at(5,5), game.at(5,7), game.at(7,5), game.at(7,7)]	//Posicion de enemigos
 		14.times{
 			i => 14.times{
-				j => var probDeAparecer = 1.randomUpTo(10)
+				j => const probDeAparecer = 1.randomUpTo(10)
 					if(probDeAparecer < 5 && !posicionesNoRemovibles.contains(game.at(i,j)) && !posDondeNoPuedeAparecer.contains(game.at(i,j)))
 						new Caja(position = game.at(i,j)).ponerCaja()
 			}

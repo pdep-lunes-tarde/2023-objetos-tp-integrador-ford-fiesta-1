@@ -7,9 +7,9 @@ class Bombardero
 	var property vidas = 3
 	var property position
 	var property image
-	var capacidadDeBombas = 3
-	var bombas = []
-	var tamanioDeBomba = 1
+	var property capacidadDeBombas = 1
+	var property bombas = []
+	var property tamanioDeBomba = 1
 	const posicionInicial = position
 	
 	method irArriba(){
@@ -54,5 +54,7 @@ class Bombardero
 	
 	
 	method vidaExtra(){vidas++}
+	method bombaExtra(){capacidadDeBombas++}
+	method bombaMasGrande(){tamanioDeBomba = 2}
 	
 }
