@@ -53,8 +53,11 @@ class Bombardero
 	}
 	
 	
-	method vidaExtra(){vidas++}
-	method bombaExtra(){capacidadDeBombas++}
+	method vidaExtra(){
+		if(vidas < 5)
+			vidas++
+	}
+	method bombaExtra(){capacidadDeBombas = 2}
 	method bombaMasGrande(){tamanioDeBomba = 2}
 	
 }
