@@ -13,6 +13,14 @@ class Bombardero
 	const posicionInicial = position
 	var property estaVivo = true
 	
+	method iniciarPropiedades(){
+		vidas = 3
+		capacidadDeBombas = 1
+		tamanioDeBomba = 1
+		estaVivo = true
+		position = posicionInicial
+	}	
+	
 	method irArriba(){
 		self.moverse(position.up(1))
 	}
@@ -64,8 +72,9 @@ class Bombardero
 	}
 	method bombaExtra(){capacidadDeBombas = 2}
 	method bombaMasGrande(){tamanioDeBomba = 2}
-	
 	method muestraVida()
+	method efecto(a){}
+	method matar(a){}
 }
 
 

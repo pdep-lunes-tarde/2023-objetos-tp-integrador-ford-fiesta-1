@@ -16,6 +16,10 @@ object menuganaste{
 		if(juego.rivales() == []){
 			game.clear()
 			game.addVisual(self)
+			keyboard.any().onPressDo({
+				game.clear()
+				juego.reiniciar()
+			})
 			}
 		}
 }
@@ -24,11 +28,25 @@ object juego {
 	
 	var estaMenu = true
 	var spawnRivales = false
-	var property rivales = [new Rival(position = game.at(5,5)),
-						new Rival(position = game.at(7,5)),
-						new Rival(position = game.at(5,7)),
-						new Rival(position = game.at(7,7))
+	const rivalesInicio =[new Rival(position = game.at(5,5))
+//						new Rival(position = game.at(7,5)),
+//						new Rival(position = game.at(5,7)),
+//						new Rival(position = game.at(7,7))
 		]
+	var property rivales = rivalesInicio
+	
+	method reiniciar(){
+		estaMenu = true
+    	spawnRivales = false
+    	rivales = rivalesInicio
+    	
+    	zonaDeJuego.reiniciarPosiciones()
+    	game.boardGround("./imagenes/fondo.png")
+		zonaDeJuego.generarMapa()
+		zonaDeJuego.generarCajas()
+		game.addVisual(menu)
+		keyboard.any().onPressDo{self.inicializarJugadores()}
+	}
 	
 	method jugar(){
 		game.title("Bomberman")
@@ -71,6 +89,7 @@ object juego {
 		keyboard.a().onPressDo({jugador1.irIzquierda()})
 		keyboard.d().onPressDo({jugador1.irDerecha()})
 		game.addVisual(jugador1)
+		jugador1.iniciarPropiedades()
 		jugador1.muestraVida()
 		keyboard.space().onPressDo({jugador1.ponerBomba()})
 		game.onCollideDo(jugador1,{elemento => elemento.matar(jugador1)})
@@ -83,8 +102,8 @@ object juego {
 		keyboard.left().onPressDo({jugador2.irIzquierda()})
 		keyboard.right().onPressDo({jugador2.irDerecha()})
 		game.addVisual(jugador2)
+		jugador2.iniciarPropiedades()
 		jugador2.muestraVida()
-		jugador2.moverse(game.at(13,13))
 		keyboard.shift().onPressDo({jugador2.ponerBomba()})
 		game.onCollideDo(jugador2,{elemento => elemento.matar(jugador2)})
 		game.onCollideDo(jugador2,{powerUp => powerUp.efecto(jugador2)})
@@ -114,9 +133,9 @@ object jugador2 inherits Bombardero (position = game.at(13,13), image = "./image
 }
 
 object zonaDeJuego{
-	var posicionesOcupadas = []
-	var posicionesOcupadasCajas = []
-	var posicionesNoRemovibles = []
+	var property posicionesOcupadas = []
+	var property posicionesOcupadasCajas = []
+	var property posicionesNoRemovibles = []
 	
 	method agregarPos(posicion){
 		posicionesOcupadas.add(posicion)
@@ -142,6 +161,11 @@ object zonaDeJuego{
 		return posicionesOcupadas.contains(posicion) or 
 		posicionesNoRemovibles.contains(posicion) or
 		posicionesOcupadasCajas.contains(posicion)
+	}
+	
+	method reiniciarPosiciones(){
+		posicionesOcupadas = []
+		posicionesOcupadasCajas = []
 	}
 	
 	method generarMapa(){
