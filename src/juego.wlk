@@ -11,13 +11,20 @@ object menu{
 object menuganaste{
 	var property image = "./imagenes/menuganaste.png"
 	var property position = game.origin()
+	
+	method mostrar(){
+		if(juego.rivales() == []){
+			game.clear()
+			game.addVisual(self)
+			}
+		}
 }
 
 object juego {
 	
 	var estaMenu = true
 	var spawnRivales = false
-	const rivales = [new Rival(position = game.at(5,5)),
+	var property rivales = [new Rival(position = game.at(5,5)),
 						new Rival(position = game.at(7,5)),
 						new Rival(position = game.at(5,7)),
 						new Rival(position = game.at(7,7))

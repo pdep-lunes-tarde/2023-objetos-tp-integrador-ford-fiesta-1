@@ -22,6 +22,8 @@ class Rival {
 	
 	method muere(){
 		game.removeVisual(self)
+		juego.rivales().remove(self)
+		game.schedule(500, {menuganaste.mostrar()})
 	}
 	
 	method efecto(jugador){}
