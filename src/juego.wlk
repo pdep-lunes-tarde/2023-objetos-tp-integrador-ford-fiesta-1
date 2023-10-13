@@ -16,13 +16,21 @@ object menu{
 }
 
 object menuganaste{
-	var property image = "./assets/menues/menuganaste.png"
+	var property image = "./assets/menues/menuganaste1.png"
 	var property position = game.origin()
+	
+	method animar(){
+	if(image == "./assets/menues/menuganaste1.png")
+		image = "./assets/menues/menuganaste2.png"
+	else
+		image = "./assets/menues/menuganaste1.png"
+	}
 	
 	method mostrar(){
 		if(juego.rivales() == []){
 			game.clear()
 			game.addVisual(self)
+			game.onTick(500, "animacion menuganaste" ,{self.animar()})
 			keyboard.any().onPressDo({
 				game.clear()
 				juego.reiniciar()
