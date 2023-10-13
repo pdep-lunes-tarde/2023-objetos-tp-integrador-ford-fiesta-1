@@ -14,7 +14,7 @@ class PowerUp{
 }
 
 class UnaVidaExtra inherits PowerUp{
-	var property image = "./imagenes/vidaextra.png"
+	var property image = "./assets/powerups/vidaextra.png"
 	override method efecto(jugador){
 		jugador.vidaExtra()
 		super(jugador)
@@ -22,7 +22,7 @@ class UnaVidaExtra inherits PowerUp{
 }
 
 class UnaBombaExtra inherits PowerUp{
-	var property image = "./imagenes/bombaextra.png"
+	var property image = "./assets/powerups/bombaextra.png"
 	override method efecto(jugador){
 		jugador.bombaExtra()
 		super(jugador)
@@ -30,7 +30,7 @@ class UnaBombaExtra inherits PowerUp{
 }
 
 class BombaMasGrande inherits PowerUp{
-	var property image = "./imagenes/bombamasgrande.png"
+	var property image = "./assets/powerups/bombamasgrande.png"
 	override method efecto(jugador){
 		jugador.bombaMasGrande()
 		super(jugador)

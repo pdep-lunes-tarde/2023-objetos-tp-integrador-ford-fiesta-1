@@ -4,7 +4,7 @@ import powerups.*
 
 class Caja{
 	var property position
-	var property image = "./imagenes/caja.png"
+	var property image = "./assets/muros/murodestructible.png"
 	
 	method ponerCaja(){
 		game.addVisual(self)

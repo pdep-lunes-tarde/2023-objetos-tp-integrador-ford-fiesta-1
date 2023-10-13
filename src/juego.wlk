@@ -4,12 +4,19 @@ import cajas.*
 import rivales.*
 
 object menu{
-	var property image = "./imagenes/menu.png"
+	var property image = "./assets/menues/menu1.png"
 	var property position = game.origin()
+	
+	method animar(){
+	if(image == "./assets/menues/menu1.png")
+		image = "./assets/menues/menu2.png"
+	else
+		image = "./assets/menues/menu1.png"
+	}
 }
 
 object menuganaste{
-	var property image = "./imagenes/menuganaste.png"
+	var property image = "./assets/menues/menuganaste.png"
 	var property position = game.origin()
 	
 	method mostrar(){
@@ -24,16 +31,30 @@ object menuganaste{
 		}
 }
 
+object background{
+	var property image = "./assets/menues/background.png"
+	var property position = game.origin()
+}
+
 object juego {
 	
 	var estaMenu = true
 	var spawnRivales = false
-	const rivalesInicio =[new Rival(position = game.at(5,5))
-//						new Rival(position = game.at(7,5)),
-//						new Rival(position = game.at(5,7)),
-//						new Rival(position = game.at(7,7))
+	const rivalesInicio =[new Rival(position = game.at(5,5)),
+						new Rival(position = game.at(7,5)),
+						new Rival(position = game.at(5,7)),
+						new Rival(position = game.at(7,7))
 		]
 	var property rivales = rivalesInicio
+	
+	method inicializar(){
+		game.addVisual(background)
+		zonaDeJuego.generarMapa()
+		zonaDeJuego.generarCajas()
+		game.addVisual(menu)
+		game.onTick(500, "animacion menu" ,{menu.animar()})
+		keyboard.any().onPressDo{self.inicializarJugadores()}
+	}
 	
 	method reiniciar(){
 		estaMenu = true
@@ -41,22 +62,14 @@ object juego {
     	rivales = rivalesInicio
     	
     	zonaDeJuego.reiniciarPosiciones()
-    	game.boardGround("./imagenes/fondo.png")
-		zonaDeJuego.generarMapa()
-		zonaDeJuego.generarCajas()
-		game.addVisual(menu)
-		keyboard.any().onPressDo{self.inicializarJugadores()}
+		self.inicializar()
 	}
 	
 	method jugar(){
 		game.title("Bomberman")
 		game.width(15)
 		game.height(15)
-		game.boardGround("./imagenes/fondo.png")
-		zonaDeJuego.generarMapa()
-		zonaDeJuego.generarCajas()
-		game.addVisual(menu)
-		keyboard.any().onPressDo{self.inicializarJugadores()}
+		self.inicializar()
 		game.start()
 	}
 	
@@ -112,24 +125,33 @@ object juego {
 }
 
 
-object jugador1 inherits Bombardero (position = game.at(1,1), image = "./imagenes/bomberman1.png"){
+object jugador1 inherits Bombardero (position = game.at(1,1), image = "./assets/bomberman1/bomberman1frente.png"){
 	override method muestraVida(){
 		const vidasAMostrar = new MostrarVidas(
 			position = game.at(2,14),
-			image = "./imagenes/" + self.vidas().toString() + "corazones.png"
+			image = "./assets/corazones/" + self.vidas().toString() + "corazones.png"
 		)
 		game.addVisual(vidasAMostrar)
 	}
+	
+	override method irDerecha(){super() image = "./assets/bomberman1/bomberman1derecha.png"}
+	override method irIzquierda(){super() image = "./assets/bomberman1/bomberman1izquierda.png"}
+	override method irAbajo(){super() image = "./assets/bomberman1/bomberman1frente.png"}
+	override method irArriba(){super() image = "./assets/bomberman1/bomberman1dorso.png"}
 }
 
-object jugador2 inherits Bombardero (position = game.at(13,13), image = "./imagenes/bomberman2.png"){
+object jugador2 inherits Bombardero (position = game.at(13,13), image = "./assets/bomberman2/bomberman2frente.png"){
 	override method muestraVida(){
 		const vidasAMostrar = new MostrarVidas(
 			position = game.at(9,14),
-			image = "./imagenes/" + self.vidas().toString() + "corazones.png"
+			image = "./assets/corazones/" + self.vidas().toString() + "corazones.png"
 		)
 		game.addVisual(vidasAMostrar)
 	}
+	override method irDerecha(){super() image = "./assets/bomberman2/bomberman2derecha.png"}
+	override method irIzquierda(){super() image = "./assets/bomberman2/bomberman2izquierda.png"}
+	override method irAbajo(){super() image = "./assets/bomberman2/bomberman2frente.png"}
+	override method irArriba(){super() image = "./assets/bomberman2/bomberman2dorso.png"}
 }
 
 object zonaDeJuego{
@@ -186,7 +208,7 @@ object zonaDeJuego{
 
 	
 	method generarCajas(){
-		const posDondeNoPuedeAparecer = [	game.at(1,1), game.at(1,2),game.at(2,1),				//Entorno de jugador1
+		const posDondeNoPuedeAparecer = [game.at(1,1), game.at(1,2),game.at(2,1),				//Entorno de jugador1
 										game.at(13,13), game.at(13,12), game.at(12,13),			//Entorno de jugador2
 										game.at(5,5), game.at(5,7), game.at(7,5), game.at(7,7)]	//Posicion de enemigos
 		14.times{

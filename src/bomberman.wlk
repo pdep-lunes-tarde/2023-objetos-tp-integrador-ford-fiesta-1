@@ -55,7 +55,13 @@ class Bombardero
 	method muere(){
 		if(self.vidas() > 1){
 			vidas = vidas -1
-			position = posicionInicial
+			game.removeVisual(self)
+			estaVivo = false
+			game.schedule(1000, {
+				game.addVisual(self)
+				position = posicionInicial
+				estaVivo = true
+			})
 			}
 		else{
 			vidas = 0
@@ -74,7 +80,11 @@ class Bombardero
 	method bombaMasGrande(){tamanioDeBomba = 2}
 	method muestraVida()
 	method efecto(a){}
-	method matar(a){}
+	method matar(a){
+		const frases = ["Hola!", "Tengo "+self.vidas()+" vidas!","Movete!", "Quedan "+ juego.rivales().size() + "rivales."]
+		const frase = frases.anyOne()
+		game.say(self,frase)
+	}
 }
 
 
