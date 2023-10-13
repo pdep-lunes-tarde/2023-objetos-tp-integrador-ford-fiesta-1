@@ -2,58 +2,17 @@ import wollok.game.*
 import bomberman.*
 import cajas.*
 import rivales.*
-
-object menu{
-	var property image = "./assets/menues/menu1.png"
-	var property position = game.origin()
-	
-	method animar(){
-	if(image == "./assets/menues/menu1.png")
-		image = "./assets/menues/menu2.png"
-	else
-		image = "./assets/menues/menu1.png"
-	}
-}
-
-object menuganaste{
-	var property image = "./assets/menues/menuganaste1.png"
-	var property position = game.origin()
-	
-	method animar(){
-	if(image == "./assets/menues/menuganaste1.png")
-		image = "./assets/menues/menuganaste2.png"
-	else
-		image = "./assets/menues/menuganaste1.png"
-	}
-	
-	method mostrar(){
-		if(juego.rivales() == []){
-			game.sound("./assets/sounds/stage-clear.mp3").play()
-			game.clear()
-			game.addVisual(self)
-			game.onTick(500, "animacion menuganaste" ,{self.animar()})
-			keyboard.any().onPressDo({
-				game.clear()
-				juego.reiniciar()
-			})
-			}
-		}
-}
-
-object background{
-	var property image = "./assets/menues/background.png"
-	var property position = game.origin()
-}
+import menues.*
 
 object juego {
 	
 	const musicamenu = game.sound("./assets/sounds/music-menu.mp3")
 	var estaMenu = true
 	var spawnRivales = false
-	const rivalesInicio =[new Rival(position = game.at(5,5)),
-						new Rival(position = game.at(7,5)),
-						new Rival(position = game.at(5,7)),
-						new Rival(position = game.at(7,7))
+	const rivalesInicio =[new Rival(position = game.at(5,5))
+//						new Rival(position = game.at(7,5)),
+//						new Rival(position = game.at(5,7)),
+//						new Rival(position = game.at(7,7))
 		]
 	var property rivales = rivalesInicio
 	
@@ -62,8 +21,12 @@ object juego {
 		zonaDeJuego.generarMapa()
 		zonaDeJuego.generarCajas()
 		game.addVisual(menu)
-		game.onTick(500, "animacion menu" ,{menu.animar()})
-		keyboard.any().onPressDo{self.inicializarJugadores()}
+//		game.onTick(500, "animacion menu" ,{menu.animar()})
+		if(estaMenu){
+			keyboard.up().onPressDo({menu.arriba()})
+			keyboard.down().onPressDo({menu.abajo()})
+		}
+		keyboard.enter().onPressDo{self.inicializarJugadores()}
 	}
 	
 	method reiniciar(){
@@ -86,12 +49,19 @@ object juego {
 	
 	method inicializarJugadores(){
 			if(estaMenu){
-				musicamenu.pause()
+				if(!musicamenu.paused())
+					musicamenu.pause()
 				game.sound("./assets/sounds/stage-start.mp3").play()
 				game.removeVisual(menu)
 				estaMenu = false
-				self.jugador1()
-				self.jugador2()
+				if(menu.seleccion() == 0)
+					self.jugador1()
+				if(menu.seleccion() == 1){
+					self.jugador1()
+					self.jugador2()
+				}
+				if(menu.seleccion() == 2)
+					game.stop()
 			}
 			
 			if (!spawnRivales) {

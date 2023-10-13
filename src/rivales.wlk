@@ -1,5 +1,6 @@
 import juego.*
 import wollok.game.*
+import menues.*
 
 class Rival {
 	var property position
