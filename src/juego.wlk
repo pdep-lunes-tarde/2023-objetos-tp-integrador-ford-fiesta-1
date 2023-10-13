@@ -28,6 +28,7 @@ object menuganaste{
 	
 	method mostrar(){
 		if(juego.rivales() == []){
+			game.sound("./assets/sounds/stage-clear.mp3").play()
 			game.clear()
 			game.addVisual(self)
 			game.onTick(500, "animacion menuganaste" ,{self.animar()})
@@ -46,6 +47,7 @@ object background{
 
 object juego {
 	
+	const musicamenu = game.sound("./assets/sounds/music-menu.mp3")
 	var estaMenu = true
 	var spawnRivales = false
 	const rivalesInicio =[new Rival(position = game.at(5,5)),
@@ -78,11 +80,14 @@ object juego {
 		game.width(15)
 		game.height(15)
 		self.inicializar()
+		game.schedule(500, {musicamenu.play()})
 		game.start()
 	}
 	
 	method inicializarJugadores(){
 			if(estaMenu){
+				musicamenu.pause()
+				game.sound("./assets/sounds/stage-start.mp3").play()
 				game.removeVisual(menu)
 				estaMenu = false
 				self.jugador1()

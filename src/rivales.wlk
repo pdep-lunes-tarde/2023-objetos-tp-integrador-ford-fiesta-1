@@ -29,6 +29,7 @@ class Rival {
 	}
 	
 	method muere(){
+		game.sound("./assets/sounds/enemy-dies.mp3").play()
 		game.removeVisual(self)
 		juego.rivales().remove(self)
 		game.schedule(500, {menuganaste.mostrar()})

@@ -3,7 +3,7 @@ import wollok.game.*
 class PowerUp{
 	var property position
 	
-	method efecto(jugador){game.removeVisual(self)}
+	method efecto(jugador){game.removeVisual(self) game.sound("./assets/sounds/item-get.mp3").play()}
 	
 	method aparecer(){
 		game.addVisual(self)

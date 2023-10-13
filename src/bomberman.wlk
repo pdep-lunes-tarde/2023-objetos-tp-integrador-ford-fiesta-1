@@ -42,6 +42,7 @@ class Bombardero
 	
 	method ponerBomba(){
 		if(!zonaDeJuego.estaOcupada(position) && bombas.size() < capacidadDeBombas && estaVivo){
+			game.sound("./assets/sounds/place-bomb.mp3").play()
 			var bomba = new Bomba(position = position, bombardero = self, tamanio = tamanioDeBomba)
 			bombas.add(bomba)
 			bomba.colocarBomba()

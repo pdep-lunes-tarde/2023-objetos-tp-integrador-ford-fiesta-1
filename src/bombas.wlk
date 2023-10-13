@@ -13,7 +13,7 @@ class Bomba
 		game.addVisual(self)
 		game.onTick(800,"bomba mediana", {image ="./assets/bombas/bombamediana.png"})
 		game.onTick(1700,"bomba grande", {image ="./assets/bombas/bombagrande.png"})
-		game.onTick(2500,"aparece la bomba y desaparece a los 2,5 seg" ,{self.eliminar()})
+		game.onTick(2500,"aparece la bomba y desaparece a los 2,5 seg" ,{self.eliminar() game.sound("./assets/sounds/bomb-explodes.mp3").play()})
 		zonaDeJuego.agregarPos(position)
 	}
 	
