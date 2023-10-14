@@ -76,7 +76,7 @@ object menuganaste {
 			game.addVisual(self)
 			game.onTick(500, "animacion menuganaste" ,{self.animar()})
 			keyboard.r().onPressDo({
-				game.clear()
+				game.removeVisual(self)
 				juego.reiniciar()
 			})
 			}

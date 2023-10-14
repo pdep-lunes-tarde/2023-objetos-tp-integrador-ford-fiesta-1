@@ -9,12 +9,12 @@ object juego {
 	const musicamenu = game.sound("./assets/sounds/music-menu.mp3")
 	var estaMenu = true
 	var spawnRivales = false
-	const rivalesInicio =[new Rival(position = game.at(5,5)),
+	var property rivales = [new Rival(position = game.at(5,5)),
 						new Rival(position = game.at(7,5)),
 						new Rival(position = game.at(5,7)),
-						new Rival(position = game.at(7,7))
+						new Rival(position = game.at(7,7)),
+						boss
 		]
-	var property rivales = rivalesInicio
 	
 	method inicializar(){
 		game.addVisual(background)
@@ -32,7 +32,12 @@ object juego {
 	method reiniciar(){
 		estaMenu = true
     	spawnRivales = false
-    	rivales = rivalesInicio
+    	rivales = [new Rival(position = game.at(5,5)),
+						new Rival(position = game.at(7,5)),
+						new Rival(position = game.at(5,7)),
+						new Rival(position = game.at(7,7)),
+						boss
+		]
     	
     	zonaDeJuego.reiniciarPosiciones()
 		self.inicializar()
@@ -76,6 +81,7 @@ object juego {
 			game.addVisual(rival)
 			game.onTick(1000, "movimiento", {rival.movimientoAleatorio()})
 			}
+			boss.muestraVida()
 		}
 	}
 	
