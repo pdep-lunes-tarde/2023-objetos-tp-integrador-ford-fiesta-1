@@ -9,10 +9,10 @@ object juego {
 	const musicamenu = game.sound("./assets/sounds/music-menu.mp3")
 	var estaMenu = true
 	var spawnRivales = false
-	const rivalesInicio =[new Rival(position = game.at(5,5))
-//						new Rival(position = game.at(7,5)),
-//						new Rival(position = game.at(5,7)),
-//						new Rival(position = game.at(7,7))
+	const rivalesInicio =[new Rival(position = game.at(5,5)),
+						new Rival(position = game.at(7,5)),
+						new Rival(position = game.at(5,7)),
+						new Rival(position = game.at(7,7))
 		]
 	var property rivales = rivalesInicio
 	
