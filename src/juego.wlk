@@ -13,8 +13,9 @@ object juego {
 						new Rival(position = game.at(7,5)),
 						new Rival(position = game.at(5,7)),
 						new Rival(position = game.at(7,7)),
-						boss
-		]
+						boss]
+	const velocidadDeRivales = 1000
+	var property jugadores = []
 	
 	method inicializar(){
 		game.addVisual(background)
@@ -22,10 +23,8 @@ object juego {
 		zonaDeJuego.generarCajas()
 		game.addVisual(menu)
 //		game.onTick(500, "animacion menu" ,{menu.animar()})
-		if(estaMenu){
-			keyboard.up().onPressDo({menu.arriba()})
-			keyboard.down().onPressDo({menu.abajo()})
-		}
+		keyboard.up().onPressDo({menu.arriba()})
+		keyboard.down().onPressDo({menu.abajo()})
 		keyboard.enter().onPressDo{self.inicializarJugadores()}
 	}
 	
@@ -79,7 +78,7 @@ object juego {
 		if(!game.hasVisual(menu)){
 		rivales.forEach{rival => 
 			game.addVisual(rival)
-			game.onTick(1000, "movimiento", {rival.movimientoAleatorio()})
+			game.onTick(velocidadDeRivales, "movimiento", {rival.movimientoAleatorio()})
 			}
 			boss.muestraVida()
 		}
@@ -91,6 +90,7 @@ object juego {
 		keyboard.a().onPressDo({jugador1.irIzquierda()})
 		keyboard.d().onPressDo({jugador1.irDerecha()})
 		game.addVisual(jugador1)
+		self.jugadores().add(self)
 		jugador1.iniciarPropiedades()
 		jugador1.muestraVida()
 		keyboard.space().onPressDo({jugador1.ponerBomba()})
@@ -104,6 +104,7 @@ object juego {
 		keyboard.left().onPressDo({jugador2.irIzquierda()})
 		keyboard.right().onPressDo({jugador2.irDerecha()})
 		game.addVisual(jugador2)
+		self.jugadores().add(self)
 		jugador2.iniciarPropiedades()
 		jugador2.muestraVida()
 		keyboard.shift().onPressDo({jugador2.ponerBomba()})
@@ -113,35 +114,15 @@ object juego {
 	
 }
 
+object jugador1 inherits Bombardero (position = game.at(1,1),
+									image = "./assets/bomberman1/bomberman1frente.png",
+									num = "1",
+									posVidas = game.at(2,14)){}
 
-object jugador1 inherits Bombardero (position = game.at(1,1), image = "./assets/bomberman1/bomberman1frente.png"){
-	override method muestraVida(){
-		const vidasAMostrar = new MostrarVidas(
-			position = game.at(2,14),
-			image = "./assets/corazones/" + self.vidas().toString() + "corazones.png"
-		)
-		game.addVisual(vidasAMostrar)
-	}
-	
-	override method irDerecha(){super() image = "./assets/bomberman1/bomberman1derecha.png"}
-	override method irIzquierda(){super() image = "./assets/bomberman1/bomberman1izquierda.png"}
-	override method irAbajo(){super() image = "./assets/bomberman1/bomberman1frente.png"}
-	override method irArriba(){super() image = "./assets/bomberman1/bomberman1dorso.png"}
-}
-
-object jugador2 inherits Bombardero (position = game.at(13,13), image = "./assets/bomberman2/bomberman2frente.png"){
-	override method muestraVida(){
-		const vidasAMostrar = new MostrarVidas(
-			position = game.at(9,14),
-			image = "./assets/corazones/" + self.vidas().toString() + "corazones.png"
-		)
-		game.addVisual(vidasAMostrar)
-	}
-	override method irDerecha(){super() image = "./assets/bomberman2/bomberman2derecha.png"}
-	override method irIzquierda(){super() image = "./assets/bomberman2/bomberman2izquierda.png"}
-	override method irAbajo(){super() image = "./assets/bomberman2/bomberman2frente.png"}
-	override method irArriba(){super() image = "./assets/bomberman2/bomberman2dorso.png"}
-}
+object jugador2 inherits Bombardero (position = game.at(13,13),
+									image = "./assets/bomberman2/bomberman2frente.png",
+									num = "2",
+									posVidas = game.at(9,14)){}
 
 object zonaDeJuego{
 	var property posicionesOcupadas = []
@@ -197,9 +178,10 @@ object zonaDeJuego{
 
 	
 	method generarCajas(){
-		const posDondeNoPuedeAparecer = [game.at(1,1), game.at(1,2),game.at(2,1),				//Entorno de jugador1
-										game.at(13,13), game.at(13,12), game.at(12,13),			//Entorno de jugador2
-										game.at(5,5), game.at(5,7), game.at(7,5), game.at(7,7)]	//Posicion de enemigos
+		const entornoJugador1 = [game.at(1,1), game.at(1,2),game.at(2,1)]
+		const entornoJugador2 = [game.at(13,13), game.at(13,12), game.at(12,13)]
+		const entornoEnemigos = [game.at(5,5), game.at(5,7), game.at(7,5), game.at(7,7)]
+		const posDondeNoPuedeAparecer = entornoJugador1 + entornoJugador2 + entornoEnemigos
 		14.times{
 			i => 14.times{
 				j => const probDeAparecer = 1.randomUpTo(10)

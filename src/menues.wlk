@@ -6,23 +6,6 @@ object menu{
 	var property position = game.origin()
 	var property seleccion = 0
 	
-//	method animar(){
-//	if(image == "./assets/menues/menu1coop.png")
-//		image = "./assets/menues/menu2coop.png"
-//	if(image == "./assets/menues/menu2coop.png")
-//		image = "./assets/menues/menu1coop.png"
-//	
-//	if(image == "./assets/menues/menu1normal.png")
-//		image = "./assets/menues/menu2normal.png"
-//	if(image == "./assets/menues/menu2normal.png")
-//		image = "./assets/menues/menu1normal.png"
-//	
-//	if(image == "./assets/menues/menu1salir.png")
-//		image = "./assets/menues/menu2salir.png"
-//	if(image == "./assets/menues/menu2salir.png")
-//		image = "./assets/menues/menu1salir.png"
-//	}
-	
 	method abajo(){
 		seleccion++
 		self.actualizarmenu()
@@ -75,6 +58,31 @@ object menuganaste {
 			game.clear()
 			game.addVisual(self)
 			game.onTick(500, "animacion menuganaste" ,{self.animar()})
+			keyboard.r().onPressDo({
+				game.removeVisual(self)
+				juego.reiniciar()
+			})
+			}
+		}
+}
+
+object menuperdiste {
+	var property image = "./assets/menues/menuperdiste1.png"
+	var property position = game.origin()
+	
+	method animar(){
+	if(image == "./assets/menues/menuperdiste1.png")
+		image = "./assets/menues/menuperdiste2.png"
+	else
+		image = "./assets/menues/menuperdiste1.png"
+	}
+	
+	method mostrar(){
+		if(juego.jugadores() == []){
+			game.sound("./assets/sounds/enemy-dies.mp3").play()
+			game.clear()
+			game.addVisual(self)
+			game.onTick(500, "animacion menuperdiste" ,{self.animar()})
 			keyboard.r().onPressDo({
 				game.removeVisual(self)
 				juego.reiniciar()

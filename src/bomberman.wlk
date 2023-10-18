@@ -1,6 +1,7 @@
 import wollok.game.*
 import bombas.*
 import juego.*
+import menues.*
 
 class Bombardero
 {
@@ -12,6 +13,8 @@ class Bombardero
 	var property tamanioDeBomba = 1
 	const posicionInicial = position
 	var property estaVivo = true
+	const num
+	const posVidas
 	
 	method iniciarPropiedades(){
 		vidas = 3
@@ -23,16 +26,20 @@ class Bombardero
 	
 	method irArriba(){
 		self.moverse(position.up(1))
+		image = "./assets/bomberman"+ num + "/bomberman"+ num + "dorso.png"
 	}
 	
 	method irAbajo(){
 		self.moverse(position.down(1))
+		image = "./assets/bomberman"+ num + "/bomberman"+ num + "frente.png"
 	}
 	method irDerecha(){
 		self.moverse(position.right(1))
+		image = "./assets/bomberman"+ num + "/bomberman"+ num + "derecha.png"
 	}
 	method irIzquierda(){
 		self.moverse(position.left(1))
+		image = "./assets/bomberman"+ num + "/bomberman"+ num + "izquierda.png"
 	}
 	
 	method moverse(posicion){
@@ -43,7 +50,7 @@ class Bombardero
 	method ponerBomba(){
 		if(!zonaDeJuego.estaOcupada(position) && bombas.size() < capacidadDeBombas && estaVivo){
 			game.sound("./assets/sounds/place-bomb.mp3").play()
-			var bomba = new Bomba(position = position, bombardero = self, tamanio = tamanioDeBomba)
+			const bomba = new Bomba(position = position, bombardero = self, tamanio = tamanioDeBomba)
 			bombas.add(bomba)
 			bomba.colocarBomba()
 		}
@@ -68,6 +75,7 @@ class Bombardero
 			vidas = 0
 			game.removeVisual(self)
 			estaVivo = false
+			game.schedule(500, {menuperdiste.mostrar()})
 			}
 		self.muestraVida()
 	}
@@ -77,12 +85,20 @@ class Bombardero
 			vidas++
 		self.muestraVida()
 	}
+
+	method muestraVida(){
+		const vidasAMostrar = new MostrarVidas(
+			position = posVidas,
+			image = "./assets/corazones/" + self.vidas().toString() + "corazones.png"
+		)
+		game.addVisual(vidasAMostrar)
+	}
+
 	method bombaExtra(){capacidadDeBombas = 2}
 	method bombaMasGrande(){tamanioDeBomba = 2}
-	method muestraVida()
 	method efecto(a){}
 	method matar(a){
-		const frases = ["Hola!", "Tengo "+self.vidas()+" vidas!","Movete!", "Quedan "+ juego.rivales().size() + "rivales."]
+		const frases = ["Hola!", "Tengo "+ self.vidas() +" vidas!","Movete!", "Quedan "+ juego.rivales().size() + "rivales."]
 		const frase = frases.anyOne()
 		game.say(self,frase)
 	}

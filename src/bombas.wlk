@@ -11,9 +11,9 @@ class Bomba
 	
 	method colocarBomba(){
 		game.addVisual(self)
-		game.onTick(800,"bomba mediana", {image ="./assets/bombas/bombamediana.png"})
-		game.onTick(1700,"bomba grande", {image ="./assets/bombas/bombagrande.png"})
-		game.onTick(2500,"aparece la bomba y desaparece a los 2,5 seg" ,{self.eliminar() game.sound("./assets/sounds/bomb-explodes.mp3").play()})
+		game.schedule(800, {image ="./assets/bombas/bombamediana.png"})
+		game.schedule(1700, {image ="./assets/bombas/bombagrande.png"})
+		game.schedule(2500,{self.eliminar() game.sound("./assets/sounds/bomb-explodes.mp3").play()})
 		zonaDeJuego.agregarPos(position)
 	}
 	
@@ -24,9 +24,6 @@ class Bomba
 	
 	method eliminar(){
 		zonaDeJuego.sacarPos(position)
-		game.removeTickEvent("aparece la bomba y desaparece a los 2,5 seg")
-		game.removeTickEvent("bomba mediana")
-		game.removeTickEvent("bomba grande")
 		game.removeVisual(self)
 		self.explota()
 	}
@@ -70,33 +67,28 @@ class Fuego{
 	
 	method expandirse(){
 		direcciones.forEach{
-			direccion => 
-			const siguienteDireccion = game.at((2 * direccion.x()) - position.x(),(2 * direccion.y()) - position.y())
+			direccion =>
+			const siguienteDireccionX = (2 * direccion.x()) - position.x()
+			const siguienteDireccionY = (2 * direccion.y()) - position.y()
+			const siguienteDireccion = game.at(siguienteDireccionX,siguienteDireccionY)
 			
-			// Claculo de imagen para animacion
+			// Inicio calaculo de imagen para animacion
 			var imagen
-			//TAMANIO DE FUEGO 1
-			if(tamanio == 1){
-				if ((2 * direccion.x()) - position.x() == position.x() && (2 * direccion.y()) - position.y() > position.y())
-					imagen = "./assets/fuegos/fuegoarribafin.png"
-				if ((2 * direccion.x()) - position.x() == position.x() && (2 * direccion.y()) - position.y() < position.y())
-					imagen = "./assets/fuegos/fuegoabajofin.png"
-				if ((2 * direccion.x()) - position.x() > position.x() && (2 * direccion.y()) - position.y() == position.y())
-					imagen = "./assets/fuegos/fuegoderechafin.png"
-				if ((2 * direccion.x()) - position.x() < position.x() && (2 * direccion.y()) - position.y() == position.y())
-					imagen = "./assets/fuegos/fuegoizquierdafin.png"
+			var auxiliar = ""
+			var direc
+			
+			if(tamanio == 1){auxiliar = "fin"}
+			
+			if (siguienteDireccionX == position.x()){
+				if (siguienteDireccionY > position.y()) direc = "arriba"
+				else direc = "abajo"
 			}
-			//TAMANIO DE FUEGO 2
-			if(tamanio == 2){
-				if ((2 * direccion.x()) - position.x() == position.x() && (2 * direccion.y()) - position.y() > position.y())
-					imagen = "./assets/fuegos/fuegoarriba.png"
-				if ((2 * direccion.x()) - position.x() == position.x() && (2 * direccion.y()) - position.y() < position.y())
-					imagen = "./assets/fuegos/fuegoabajo.png"
-				if ((2 * direccion.x()) - position.x() > position.x() && (2 * direccion.y()) - position.y() == position.y())
-					imagen = "./assets/fuegos/fuegoderecha.png"
-				if ((2 * direccion.x()) - position.x() < position.x() && (2 * direccion.y()) - position.y() == position.y())
-					imagen = "./assets/fuegos/fuegoizquierda.png"
+			if (siguienteDireccionY == position.y()){
+				if(siguienteDireccionX > position.x()) direc = "derecha"
+				else direc = "izquierda"
 			}
+			
+			imagen = "./assets/fuegos/fuego" + direc + auxiliar + ".png"
 			// Fin de calculo de imagen para animacion
 			
 			if(zonaDeJuego.sePuedeRomper(direccion)){
