@@ -73,6 +73,7 @@ class Bombardero
 			}
 		else{
 			vidas = 0
+			juego.jugadores().remove(self)
 			game.removeVisual(self)
 			estaVivo = false
 			game.schedule(500, {menuperdiste.mostrar()})

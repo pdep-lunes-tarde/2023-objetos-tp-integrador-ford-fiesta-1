@@ -52,7 +52,7 @@ object menu{
 }
 
 class Menuesfin {
-	var property image = "./assets/menues/menuganaste1.png"
+	var property image = "./assets/menues/menu" + estado +"1.png"
 	var property position = game.origin()
 	var estado
 	
@@ -64,7 +64,7 @@ class Menuesfin {
 	}
 	
 	method mostrar(){
-		if(juego.rivales() == []){
+		if(juego.rivales().isEmpty()){
 			game.sound("./assets/sounds/stage-clear.mp3").play()
 			game.clear()
 			game.addVisual(self)
@@ -81,7 +81,7 @@ object menuganaste inherits Menuesfin(estado = "ganaste"){}
 
 object menuperdiste inherits Menuesfin(estado = "perdiste") {
 	override method mostrar(){
-		if(juego.jugadores() == []){
+		if(juego.jugadores().isEmpty()){
 			game.sound("./assets/sounds/enemy-dies.mp3").play()
 			game.clear()
 			game.addVisual(self)
