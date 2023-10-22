@@ -22,7 +22,8 @@ object juego {
 		zonaDeJuego.generarMapa()
 		zonaDeJuego.generarCajas()
 		game.addVisual(menu)
-//		game.onTick(500, "animacion menu" ,{menu.animar()})
+		game.addVisual(selector)
+		game.onTick(500, "animacion menu" ,{menu.animar()})
 		keyboard.up().onPressDo({menu.arriba()})
 		keyboard.down().onPressDo({menu.abajo()})
 		keyboard.enter().onPressDo{self.inicializarJugadores()}
@@ -57,6 +58,7 @@ object juego {
 					musicamenu.pause()
 				game.sound("./assets/sounds/stage-start.mp3").play()
 				game.removeVisual(menu)
+				game.removeVisual(selector)
 				estaMenu = false
 				if(menu.seleccion() == 0)
 					self.jugador1()
