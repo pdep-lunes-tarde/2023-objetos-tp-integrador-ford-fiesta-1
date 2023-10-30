@@ -1,17 +1,19 @@
 import wollok.game.*
 import juego.*
 
+const dirmenu = "./assets/menues/"
+
 object selector{
 	var property position = game.origin()
-	var property image = "./assets/menues/menu-seleccion-normal.png"
+	var property image = dirmenu + "menu-seleccion-normal.png"
 	
-	method normal(){image = "./assets/menues/menu-seleccion-normal.png"}
-	method coop(){image = "./assets/menues/menu-seleccion-coop.png"}
-	method salir(){image = "./assets/menues/menu-seleccion-salir.png"}
+	method normal(){image = dirmenu + "menu-seleccion-normal.png"}
+	method coop(){image = dirmenu + "menu-seleccion-coop.png"}
+	method salir(){image = dirmenu + "menu-seleccion-salir.png"}
 }
 
 object menu{
-	var property image = "./assets/menues/menu-base.png"
+	var property image = dirmenu + "menu-base.png"
 	var property position = game.origin()
 	var property seleccion = 0
 	
@@ -44,23 +46,23 @@ object menu{
 	method salir(){selector.salir()}
 	
 	method animar(){
-		if(image == "./assets/menues/menu-base.png")
-			image = "./assets/menues/menu-base2.png"
+		if(image == dirmenu + "menu-base.png")
+			image = dirmenu + "menu-base2.png"
 		else
-			image = "./assets/menues/menu-base.png"
+			image = dirmenu + "menu-base.png"
 	}
 }
 
 class Menuesfin {
-	var property image = "./assets/menues/menu" + estado +"1.png"
+	var property image = dirmenu + "menu" + estado +"1.png"
 	var property position = game.origin()
 	var estado
 	
 	method animar(){
-	if(image == "./assets/menues/menu" + estado +"1.png")
-		image = "./assets/menues/menu" + estado +"2.png"
+	if(image == dirmenu + "menu" + estado +"1.png")
+		image = dirmenu + "menu" + estado +"2.png"
 	else
-		image = "./assets/menues/menu" + estado+ "1.png"
+		image = dirmenu + "menu" + estado+ "1.png"
 	}
 	
 	method mostrar(){
@@ -95,6 +97,6 @@ object menuperdiste inherits Menuesfin(estado = "perdiste") {
 }
 
 object background{
-	var property image = "./assets/menues/background.png"
+	var property image = dirmenu + "background.png"
 	var property position = game.origin()
 }
