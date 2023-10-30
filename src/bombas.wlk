@@ -56,11 +56,11 @@ class Fuego{
 		game.schedule(600, {game.removeVisual(self)})
 		if(tamanio > 0)
 			self.expandirse()
-		game.onCollideDo(self, {caja => caja.muere() zonaDeJuego.sacarCajaEn(position)})
+		game.onCollideDo(self, {algo => algo.muere()})
 	}
 	
-	method matar(jugador){
-		jugador.muere()
+	method matar(algo){
+		algo.muere()
 	}
 	
 	method puedeExpandirse(posicion){

@@ -96,7 +96,7 @@ object juego {
 		jugador1.iniciarPropiedades()
 		jugador1.muestraVida()
 		keyboard.space().onPressDo({jugador1.ponerBomba()})
-		game.onCollideDo(jugador1,{elemento => elemento.matar(jugador1)})
+//		game.onCollideDo(jugador1,{elemento => elemento.matar(jugador1)})
 		game.onCollideDo(jugador1,{powerUp => powerUp.efecto(jugador1)})
 	}
 	
@@ -110,7 +110,7 @@ object juego {
 		jugador2.iniciarPropiedades()
 		jugador2.muestraVida()
 		keyboard.shift().onPressDo({jugador2.ponerBomba()})
-		game.onCollideDo(jugador2,{elemento => elemento.matar(jugador2)})
+//		game.onCollideDo(jugador2,{elemento => elemento.matar(jugador2)})
 		game.onCollideDo(jugador2,{powerUp => powerUp.efecto(jugador2)})
 	}
 	

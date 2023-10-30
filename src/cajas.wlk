@@ -14,6 +14,7 @@ class Caja{
 	method muere(){
 		game.removeVisual(self)
 		self.posibilidadDePowerUp()
+		zonaDeJuego.sacarCajaEn(position)
 	}
 	
 	method posibilidadDePowerUp(){
