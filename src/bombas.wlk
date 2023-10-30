@@ -7,6 +7,7 @@ class Bomba
 	var property position
 	var bombardero
 	var tamanio
+	var atraviesanParedes
 	var property image = "./assets/bombas/bombachica.png"
 	
 	method colocarBomba(){
@@ -31,7 +32,8 @@ class Bomba
 	method aparecerFuego(){
 		const fuego = new Fuego(position = position,
 								tamanio = tamanio,
-								direcciones = [position.down(1), position.up(1), position.left(1), position.right(1)]
+								direcciones = [position.down(1), position.up(1), position.left(1), position.right(1)],
+								atraviesanParedes = atraviesanParedes
 		)
 		fuego.generarFuego()
 	}
@@ -47,6 +49,7 @@ class Fuego{
 	var tamanio
 	var property image = "./assets/fuegos/fuego.png"
 	var property direcciones
+	var atraviesanParedes
 	
 	method generarFuego(){
 		game.addVisual(self)
@@ -91,12 +94,16 @@ class Fuego{
 			imagen = "./assets/fuegos/fuego" + direc + auxiliar + ".png"
 			// Fin de calculo de imagen para animacion
 			
+			var nuevotamanio = tamanio -1
+			
 			if(zonaDeJuego.sePuedeRomper(direccion)){
+				if(!atraviesanParedes && zonaDeJuego.posicionesOcupadasCajas().contains(direccion)){nuevotamanio = 0}
 				const otroFuego = new Fuego(
 								position = direccion,
-								tamanio = tamanio -1,
+								tamanio = nuevotamanio,
 								direcciones = [siguienteDireccion],
-								image = imagen // Indico la imagen que calcule antes
+								image = imagen, // Indico la imagen que calcule antes
+								atraviesanParedes = atraviesanParedes
 				)
 				otroFuego.generarFuego()
 			}

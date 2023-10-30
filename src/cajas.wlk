@@ -21,7 +21,8 @@ class Caja{
 		const powerups = [
 						new UnaVidaExtra(position = position),
 						new UnaBombaExtra(position = position),
-						new BombaMasGrande(position = position)
+						new BombaMasGrande(position = position),
+						new BombaAtraviesaParedes(position = position)
 		]
 		if(probabilidad < 3){
 			const powerupAleatorio = powerups.anyOne()

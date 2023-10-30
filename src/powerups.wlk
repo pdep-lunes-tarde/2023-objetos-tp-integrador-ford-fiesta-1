@@ -36,3 +36,11 @@ class BombaMasGrande inherits PowerUp{
 		super(jugador)
 	}
 }
+
+class BombaAtraviesaParedes inherits PowerUp{
+	var property image = "./assets/powerups/bombaatraviesaparedes.png"
+	override method efecto(jugador){
+		jugador.bombaAtraviesaParedes()
+		super(jugador)
+	}
+}

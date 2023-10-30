@@ -15,6 +15,7 @@ class Bombardero
 	var property estaVivo = true
 	const num
 	const posVidas
+	var bombasAtraviesanParedes = false
 	
 	method iniciarPropiedades(){
 		vidas = 3
@@ -50,7 +51,7 @@ class Bombardero
 	method ponerBomba(){
 		if(!zonaDeJuego.estaOcupada(position) && bombas.size() < capacidadDeBombas && estaVivo){
 			game.sound("./assets/sounds/place-bomb.mp3").play()
-			const bomba = new Bomba(position = position, bombardero = self, tamanio = tamanioDeBomba)
+			const bomba = new Bomba(position = position, bombardero = self, tamanio = tamanioDeBomba, atraviesanParedes = bombasAtraviesanParedes)
 			bombas.add(bomba)
 			bomba.colocarBomba()
 		}
@@ -95,6 +96,7 @@ class Bombardero
 		game.addVisual(vidasAMostrar)
 	}
 
+	method bombaAtraviesaParedes(){bombasAtraviesanParedes = true}
 	method bombaExtra(){capacidadDeBombas = 2}
 	method bombaMasGrande(){tamanioDeBomba = 2}
 	method efecto(a){}
