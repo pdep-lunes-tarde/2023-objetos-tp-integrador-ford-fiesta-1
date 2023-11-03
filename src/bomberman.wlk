@@ -23,7 +23,9 @@ class Bombardero
 		tamanioDeBomba = 1
 		estaVivo = true
 		position = posicionInicial
-	}	
+	}
+	
+	method puedeMoverse(posicion) = !zonaDeJuego.estaOcupada(posicion)
 	
 	method irArriba(){
 		self.moverse(position.up(1))
@@ -44,7 +46,7 @@ class Bombardero
 	}
 	
 	method moverse(posicion){
-		if(!zonaDeJuego.estaOcupada(posicion))
+		if(self.puedeMoverse(posicion))
 			position = posicion
 	}
 	

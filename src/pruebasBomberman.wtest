@@ -32,13 +32,21 @@ describe "pruebas del Bomberman blanco"
 	{
 		jugador1.irDerecha()
 		assert.equals(game.at(2,1),jugador1.position())
-	}
-	/*test "EL bomberman blanco al presionar la tecla ir abajo(s), permanece en la posicion (1;1)"
+	} 
+	test "EL bomberman blanco al presionar la tecla ir abajo(s), permanece en la posicion (1;1)"
 	{
 		jugador1.iniciarPropiedades()
+		zonaDeJuego.generarMapa()
 		jugador1.irAbajo()
 		assert.equals(game.at(1,1),jugador1.position())
-	}*///Falla, se va a la posicion inferior(1;0), que es una posicion no ocupada
+	}
+	test "EL bomberman blanco al presionar la tecla ir izquierda(a), permanece en la posicion (1;1)"
+	{
+		jugador1.iniciarPropiedades()
+		zonaDeJuego.generarMapa()
+		jugador1.irIzquierda()
+		assert.equals(game.at(1,1),jugador1.position())
+	}
 }
 
 describe "prueba del bomberman negro"
@@ -54,9 +62,34 @@ describe "prueba del bomberman negro"
 	}
 	test "El bomberman negro al inicial solo puede poner 1 bomba"
 	{
-		jugador1.iniciarPropiedades()
-		assert.equals(1,jugador1.capacidadDeBombas())
+		jugador2.iniciarPropiedades()
+		assert.equals(1,jugador2.capacidadDeBombas())
 	}
-
+	test "EL bomberman negro al presionar la tecla ir arriba(w), permanece en la posicion (13;13)"
+	{
+		jugador2.iniciarPropiedades()
+		zonaDeJuego.generarMapa()
+		jugador2.irArriba()
+		assert.equals(game.at(13,13),jugador2.position())
+	}
+	test "EL bomberman negro al presionar la tecla ir derecha(d), permanece en la posicion (13;13)"
+	{
+		jugador2.iniciarPropiedades()
+		zonaDeJuego.generarMapa()
+		jugador2.irDerecha()
+		assert.equals(game.at(13,13),jugador2.position())
+	} 
+	test "EL bomberman negro al presionar la tecla ir abajo(s), avanza a la posicion (13;12)"
+	{
+		jugador2.iniciarPropiedades()
+		jugador2.irAbajo()
+		assert.equals(game.at(13,12),jugador2.position())
+	}
+	test "EL bomberman negro al presionar la tecla ir izquierda(a), avanza a la posicion (12;13)"
+	{
+		jugador2.iniciarPropiedades()
+		jugador2.irIzquierda()
+		assert.equals(game.at(12,13),jugador2.position())
+	}
 
 }
