@@ -10,10 +10,10 @@ object juego {
 	var estaMenu = true
 	var spawnRivales = false
 	var property rivales = [new Rival(position = game.at(5,5)),
-						new Rival(position = game.at(7,5)),
-						new Rival(position = game.at(5,7)),
-						new Rival(position = game.at(7,7)),
-						boss]
+							new Rival(position = game.at(7,5)),
+							new Rival(position = game.at(5,7)),
+							new Rival(position = game.at(7,7)),
+							boss]
 	const velocidadDeRivales = 1000
 	var property jugadores = []
 	

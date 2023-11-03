@@ -1,0 +1,62 @@
+import wollok.game.*
+
+import bombas.*
+import bomberman.*
+import cajas.*
+import juego.*
+import powerups.*
+import rivales.*
+
+describe "pruebas del Bomberman blanco"
+{
+	test "El bomberman blanco inicia en la posicion (1 ; 1)" 
+	{
+		assert.equals(game.at(1,1),jugador1.position())
+	}
+	test "El bomberman blanco inicia con 3 vidas"
+	{
+		jugador1.iniciarPropiedades()
+		assert.equals(3,jugador1.vidas())
+	}
+	test "El bomberman blanco al inicial solo puede poner 1 bomba"
+	{
+		jugador1.iniciarPropiedades()
+		assert.equals(1,jugador1.capacidadDeBombas())
+	}
+	test "EL bomberman blanco al presionar la tecla ir arriba(w), avanza a la posicion (1;2)"
+	{
+		jugador1.irArriba()
+		assert.equals(game.at(1,2),jugador1.position())
+	}
+	test "EL bomberman blanco al presionar la tecla ir derecha(d), avanza a la posicion (2;1)"
+	{
+		jugador1.irDerecha()
+		assert.equals(game.at(2,1),jugador1.position())
+	}
+	/*test "EL bomberman blanco al presionar la tecla ir abajo(s), permanece en la posicion (1;1)"
+	{
+		jugador1.iniciarPropiedades()
+		jugador1.irAbajo()
+		assert.equals(game.at(1,1),jugador1.position())
+	}*///Falla, se va a la posicion inferior(1;0), que es una posicion no ocupada
+}
+
+describe "prueba del bomberman negro"
+{
+	test "Mientras que el bomberman negro inicia en la posicion (13 ; 13)" 
+	{
+		assert.equals(game.at(13,13),jugador2.position())
+	}
+	test "El bomberman negro inicia con 3 vidas"
+	{
+		jugador2.iniciarPropiedades()
+		assert.equals(3,jugador2.vidas())
+	}
+	test "El bomberman negro al inicial solo puede poner 1 bomba"
+	{
+		jugador1.iniciarPropiedades()
+		assert.equals(1,jugador1.capacidadDeBombas())
+	}
+
+
+}

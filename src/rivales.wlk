@@ -13,8 +13,8 @@ class Rival {
 	}
 	
 	method movimientoAleatorio() {
-        var direccionesPosibles = [position.up(1), position.down(1), position.left(1), position.right(1)]
-        var direccionAleatoria = direccionesPosibles.anyOne()
+        const direccionesPosibles = [position.up(1), position.down(1), position.left(1), position.right(1)]
+        const direccionAleatoria = direccionesPosibles.anyOne()
         if(direccionAleatoria == position.up(1))
         	image = "./assets/rivales/rivaldorso.png"
         if(direccionAleatoria == position.down(1))
@@ -51,8 +51,8 @@ object boss inherits Rival(position = game.at(5,5),image = "./assets/rivales/bos
 	}
 	
 	override method movimientoAleatorio() {
-        var direccionesPosibles = [position.up(1), position.down(1), position.left(1), position.right(1)]
-        var direccionAleatoria = direccionesPosibles.anyOne()
+        const direccionesPosibles = [position.up(1), position.down(1), position.left(1), position.right(1)]
+        const direccionAleatoria = direccionesPosibles.anyOne()
         if(direccionAleatoria == position.up(1))
         	image = "./assets/rivales/bossdorso.png"
         if(direccionAleatoria == position.down(1))
