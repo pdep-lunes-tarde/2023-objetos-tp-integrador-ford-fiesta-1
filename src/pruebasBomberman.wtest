@@ -7,7 +7,7 @@ import juego.*
 import powerups.*
 import rivales.*
 
-describe "pruebas del Bomberman blanco"
+describe "Pruebas del Bomberman Blanco"
 {
 	test "El bomberman blanco inicia en la posicion (1 ; 1)" 
 	{
@@ -40,13 +40,39 @@ describe "pruebas del Bomberman blanco"
 		jugador1.irAbajo()
 		assert.equals(game.at(1,1),jugador1.position())
 	}
-	test "EL bomberman blanco al presionar la tecla ir izquierda(a), permanece en la posicion (1;1)"
+	test "EL bomberman blanco al presionar la tecla ir izquierda(a), permanece en la posicion (1;1), ya que las posiciones de los bordes no pueden ser ocupadas"
 	{
 		jugador1.iniciarPropiedades()
 		zonaDeJuego.generarMapa()
 		jugador1.irIzquierda()
 		assert.equals(game.at(1,1),jugador1.position())
 	}
+	test "El bomberman blanco no puede ocupar posiciones pares (2n,2m) como por ejemplo (2,2)"
+	{
+		jugador1.iniciarPropiedades()
+		zonaDeJuego.generarMapa()
+		jugador1.irArriba()
+		jugador1.irDerecha()
+		assert.equals(game.at(1,2),jugador1.position())
+		assert.notEquals(game.at(2,2),jugador1.position())
+	}
+	
+	/* La bomba o el fuego deberian disminuir la vida al bomberman
+	test "Cuando una bomba explota, el bomberman blanco pierde una vida"
+	{
+		const bomba = new Bomba(position = game.at(1,1), bombardero = jugador1, tamanio = 1, atraviesanParedes = false)
+		jugador1.iniciarPropiedades()
+		zonaDeJuego.generarMapa()
+		bomba.colocarBomba()
+		bomba.explota()
+		bomba.eliminar()
+		bomba.aparecerFuego()
+		assert.equals(game.at(1,1),jugador1.position())
+		assert.equals(game.at(1,1),bomba.position())
+		bomba.efecto(jugador1)
+		assert.equals(2,jugador1.vidas())//Aca falla, deberia mostrar que tiene 2 vidas pero tiene 3
+		
+	}*/
 }
 
 describe "prueba del bomberman negro"
