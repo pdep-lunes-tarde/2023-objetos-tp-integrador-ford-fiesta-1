@@ -2,6 +2,8 @@ import wollok.game.*
 import juego.*
 import rivales.*
 
-program iniciar { 
+//Inicia Wollok Game
+program iniciar 
+{ 
 	juego.jugar()
 }

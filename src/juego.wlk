@@ -4,20 +4,23 @@ import cajas.*
 import rivales.*
 import menues.*
 
-object juego {
-	
+object juego 
+{
 	const musicamenu = game.sound("./assets/sounds/music-menu.mp3")
 	var estaMenu = true
 	var spawnRivales = false
-	var property rivales = [new Rival(position = game.at(5,5)),
-							new Rival(position = game.at(7,5)),
-							new Rival(position = game.at(5,7)),
-							new Rival(position = game.at(7,7)),
-							boss]
+	var property rivales = [	
+										new Rival(position = game.at(5,5)),
+										new Rival(position = game.at(7,5)),
+										new Rival(position = game.at(5,7)),
+										new Rival(position = game.at(7,7)),
+										boss											
+									]
 	const velocidadDeRivales = 1000
 	var property jugadores = []
 	
-	method inicializar(){
+	method inicializar()
+	{
 		game.addVisual(background)
 		zonaDeJuego.generarMapa()
 		zonaDeJuego.generarCajas()
@@ -29,21 +32,24 @@ object juego {
 		keyboard.enter().onPressDo{self.inicializarJugadores()}
 	}
 	
-	method reiniciar(){
+	method reiniciar()
+	{
 		estaMenu = true
     	spawnRivales = false
-    	rivales = [new Rival(position = game.at(5,5)),
-						new Rival(position = game.at(7,5)),
-						new Rival(position = game.at(5,7)),
-						new Rival(position = game.at(7,7)),
-						boss
-		]
-    	
+    	rivales =	[	
+    						new Rival(position = game.at(5,5)),
+							new Rival(position = game.at(7,5)),
+							new Rival(position = game.at(5,7)),
+							new Rival(position = game.at(7,7)),
+							boss
+						]	
+    		
     	zonaDeJuego.reiniciarPosiciones()
 		self.inicializar()
 	}
 	
-	method jugar(){
+	method jugar()
+	{
 		game.title("Bomberman")
 		game.width(15)
 		game.height(15)
@@ -52,7 +58,8 @@ object juego {
 		game.start()
 	}
 	
-	method inicializarJugadores(){
+	method inicializarJugadores()
+	{
 			if(estaMenu){
 				if(!musicamenu.paused())
 					musicamenu.pause()
@@ -62,7 +69,8 @@ object juego {
 				estaMenu = false
 				if(menu.seleccion() == 0)
 					self.jugador1()
-				if(menu.seleccion() == 1){
+				if(menu.seleccion() == 1)
+				{
 					self.jugador1()
 					self.jugador2()
 				}
@@ -70,10 +78,11 @@ object juego {
 					game.stop()
 			}
 			
-			if (!spawnRivales) {
-                self.inicializarRivales()
-                spawnRivales = true
-            }
+			if (!spawnRivales) 
+			{
+         	self.inicializarRivales()
+         	spawnRivales = true
+         }
 	}
 	
 	method inicializarRivales(){
@@ -86,7 +95,8 @@ object juego {
 		}
 	}
 	
-	method jugador1(){
+	method jugador1()
+	{
 		keyboard.w().onPressDo({jugador1.irArriba()})
 		keyboard.s().onPressDo({jugador1.irAbajo()})
 		keyboard.a().onPressDo({jugador1.irIzquierda()})
@@ -100,7 +110,8 @@ object juego {
 		game.onCollideDo(jugador1,{powerUp => powerUp.efecto(jugador1)})
 	}
 	
-	method jugador2(){
+	method jugador2()
+	{
 		keyboard.up().onPressDo({jugador2.irArriba()})
 		keyboard.down().onPressDo({jugador2.irAbajo()})
 		keyboard.left().onPressDo({jugador2.irIzquierda()})
@@ -116,17 +127,18 @@ object juego {
 	
 }
 
-object jugador1 inherits Bombardero (position = game.at(1,1),
-									image = "./assets/bomberman1/bomberman1frente.png",
-									num = "1",
-									posVidas = game.at(2,14)){}
+object jugador1 inherits Bombardero (	position = game.at(1,1),
+													image = "./assets/bomberman1/bomberman1frente.png",
+													num = "1",
+													posVidas = game.at(2,14)	){}
 
-object jugador2 inherits Bombardero (position = game.at(13,13),
-									image = "./assets/bomberman2/bomberman2frente.png",
-									num = "2",
-									posVidas = game.at(9,14)){}
+object jugador2 inherits Bombardero (	position = game.at(13,13),
+													image = "./assets/bomberman2/bomberman2frente.png",
+													num = "2",
+													posVidas = game.at(9,14) ){}
 
-object zonaDeJuego{
+object zonaDeJuego
+{
 	var property posicionesOcupadas = []
 	var property posicionesOcupadasCajas = []
 	var property posicionesNoRemovibles = []
@@ -162,13 +174,16 @@ object zonaDeJuego{
 		posicionesOcupadasCajas = []
 	}
 	
-	method generarMapa(){
+	method generarMapa()
+	{
 		6.times{ //Agrego bloques fijos en el mapa: una posicion sin bloque, una con
-			i => 6.times{
+			i => 6.times
+			{
 				j => posicionesNoRemovibles.add(game.at(i*2,j*2))
 			}
 		}
-		14.times{ //Agrego paredes del borde de mapa
+		14.times
+		{ //Agrego paredes del borde de mapa
 			i =>
 				posicionesNoRemovibles.add(game.at(i,0))
 				posicionesNoRemovibles.add(game.at(i,14))
@@ -184,8 +199,10 @@ object zonaDeJuego{
 		const entornoJugador2 = [game.at(13,13), game.at(13,12), game.at(12,13)]
 		const entornoEnemigos = [game.at(5,5), game.at(5,7), game.at(7,5), game.at(7,7)]
 		const posDondeNoPuedeAparecer = entornoJugador1 + entornoJugador2 + entornoEnemigos
-		14.times{
-			i => 14.times{
+		14.times
+		{
+			i => 14.times
+			{
 				j => const probDeAparecer = 1.randomUpTo(10)
 					if(probDeAparecer < 5 && !posicionesNoRemovibles.contains(game.at(i,j)) && !posDondeNoPuedeAparecer.contains(game.at(i,j)))
 						new Caja(position = game.at(i,j)).ponerCaja()
