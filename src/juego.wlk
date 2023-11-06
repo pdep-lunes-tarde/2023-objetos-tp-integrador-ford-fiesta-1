@@ -15,8 +15,8 @@ object juego
 										new Rival(position = game.at(5,7)),
 										new Rival(position = game.at(7,7)),
 										boss											
-									]
-	const velocidadDeRivales = 1000
+							]
+	const velocidadDeRivales = 1500
 	var property jugadores = []
 	
 	method inicializar()
@@ -42,7 +42,7 @@ object juego
 							new Rival(position = game.at(5,7)),
 							new Rival(position = game.at(7,7)),
 							boss
-						]	
+					]	
     		
     	zonaDeJuego.reiniciarPosiciones()
 		self.inicializar()
@@ -85,11 +85,14 @@ object juego
          }
 	}
 	
-	method inicializarRivales(){
-		if(!game.hasVisual(menu)){
-		rivales.forEach{rival => 
-			game.addVisual(rival)
-			game.onTick(velocidadDeRivales, "movimiento", {rival.movimientoAleatorio()})
+	method inicializarRivales()
+	{
+		if(!game.hasVisual(menu))
+		{
+			rivales.forEach
+			{
+					rival => game.addVisual(rival)
+					game.onTick(velocidadDeRivales, "movimiento", {rival.movimientoAleatorio()})
 			}
 			boss.muestraVida()
 		}
