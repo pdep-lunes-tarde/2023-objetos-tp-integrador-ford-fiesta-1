@@ -1,0 +1,259 @@
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{flushend}
+
+\usepackage[left=2.3cm,top=3cm,right=2.3cm,bottom=3cm]{geometry}
+\usepackage{geometry}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{verbatim}
+\usepackage{lineno} %enumerar las lineas
+\renewcommand\linenumberfont{\normalfont\small}
+\setlength\linenumbersep{.5cm} %distancia al margen de los numeros
+\usepackage{float}
+\usepackage{array}
+\usepackage{fancyvrb}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{booktabs}%para tablas más copadas
+\usepackage[small,bf,width=0.7\textwidth,labelsep=period]{caption}%para tablas más copadas
+\usepackage{subcaption}
+%\usepackage{subfigure}
+\usepackage{mathtools}  % dcases
+\usepackage{fancyhdr}
+\usepackage{emptypage}
+%\usepackage[amssymb]{SIunits}%unidades
+\usepackage[version-1-compatibility]{siunitx}
+\usepackage{amsmath}
+%\usepackage{booktabs}
+%\usepackage{cancel}
+%\usepackage{cleveref}
+%\usepackage{colortbl}
+%\usepackage{csquotes}
+%\usepackage{helvet}
+%\usepackage{mathpazo}
+%\usepackage{multirow}
+%\usepackage{listings}
+%\usepackage{pgfplots}
+\usepackage{circuitikz}
+\usepackage{tikz}
+
+%++++++++++++++++++++++++++++++++++
+\usepackage{color}
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+
+\definecolor{Apricot}{RGB}{253,199,130}
+\definecolor{Aquamarine}{RGB}{0,181,202}
+\definecolor{Bittersweet}{RGB}{192,79,23}
+\definecolor{Black}{RGB}{0,0,0}
+\definecolor{Blue}{RGB}{0,0,255}
+\definecolor{BlueGreen}{RGB}{0,179,184}
+\definecolor{BlueViolet}{RGB}{71,57,146}
+\definecolor{BrickRed}{RGB}{182,50,28}
+\definecolor{Brown}{RGB}{121,37,0}
+\definecolor{BurntOrange}{RGB}{247,146,29}
+\definecolor{CadetBlue}{RGB}{116,114,154}
+\definecolor{CarnationPink}{RGB}{242,130,180}
+\definecolor{Cerulean}{RGB}{0,162,227}
+\definecolor{CornflowerBlue}{RGB}{65,176,228}
+\definecolor{Cyan}{RGB}{0,174,239}
+\definecolor{Dandelion}{RGB}{253,188,66}
+\definecolor{DarkOrchid}{RGB}{164,83,138}
+\definecolor{Emerald}{RGB}{0,169,157}
+\definecolor{ForestGreen}{RGB}{0,155,85}
+\definecolor{Fuchsia}{RGB}{140,54,140}
+\definecolor{Goldenrod}{RGB}{255,223,66}
+\definecolor{Gray}{RGB}{148,150,152}
+\definecolor{Green}{RGB}{0,166,79}
+\definecolor{GreenYellow}{RGB}{223,230,116}
+\definecolor{JungleGreen}{RGB}{0,169,154}
+\definecolor{Lavender}{RGB}{244,158,196}
+\definecolor{LimeGreen}{RGB}{141,199,62}
+\definecolor{Magenta}{RGB}{236,0,140}
+\definecolor{Mahogany}{RGB}{169,52,31}
+\definecolor{Maroon}{RGB}{175,50,53}
+\definecolor{Melon}{RGB}{248,158,123}
+\definecolor{MidnightBlue}{RGB}{0,103,149}
+\definecolor{Mulberry}{RGB}{169,60,147}
+\definecolor{NavyBlue}{RGB}{0,103,149}
+\definecolor{OliveGreen}{RGB}{60,128,49}
+\definecolor{Orange}{RGB}{245,129,55}
+\definecolor{OrangeRed}{RGB}{237,19,90}
+\definecolor{Orchid}{RGB}{175,114,176}
+\definecolor{Peach}{RGB}{247,150,90}
+\definecolor{Periwinkle}{RGB}{121,119,184}
+\definecolor{PineGreen}{RGB}{0,139,114}
+\definecolor{Plum}{RGB}{146,38,143}
+\definecolor{ProcessBlue}{RGB}{0,176,240}
+\definecolor{Purple}{RGB}{153,71,155}
+\definecolor{RawSienna}{RGB}{151,64,6}
+\definecolor{Red}{RGB}{237,27,35}
+\definecolor{RedOrange}{RGB}{242,96,70}
+\definecolor{RedViolet}{RGB}{161,36,107}
+\definecolor{Rhodamine}{RGB}{239,85,159}
+\definecolor{RoyalBlue}{RGB}{0,113,188}
+\definecolor{RoyalPurple}{RGB}{97,63,153}
+\definecolor{RubineRed}{RGB}{237,1,125}
+\definecolor{Salmon}{RGB}{246,146,137}
+\definecolor{SeaGreen}{RGB}{63,188,157}
+\definecolor{Sepia}{RGB}{103,24,0}
+\definecolor{SkyBlue}{RGB}{70,197,221}
+\definecolor{SpringGreen}{RGB}{198,220,103}
+\definecolor{Tan}{RGB}{218,157,118}
+\definecolor{TealBlue}{RGB}{0,174,179}
+\definecolor{Thistle}{RGB}{216,131,183}
+\definecolor{Turquoise}{RGB}{0,180,206}
+\definecolor{Violet}{RGB}{88,66,155}
+\definecolor{VioletRed}{RGB}{239,88,160}
+\definecolor{White}{RGB}{255,255,255}
+\definecolor{WildStrawberry}{RGB}{238,41,103}
+\definecolor{Yellow}{RGB}{255,242,0}
+\definecolor{YellowGreen}{RGB}{152,204,112}
+\definecolor{YellowOrange}{RGB}{250,162,26}
+%++++++++++++++++++++++++++++++++++
+%para agregar codigo de programa assembler:
+\usepackage{listings}
+
+%% definicion de lenguaje AVR
+\lstdefinelanguage{Wollok}{
+morekeywords=[1]{object, adc,add,adiw,sub,subi,sbc,sbiw,and,andi,or,ori,eor,com,
+                neg,sbr,cbr,inc,dec,tst,clr,ser,mul,muls,mulsu,fmul,fmuls,
+                fmulsu,rjmp,ijmp,eijmp,jmp,rcall,icall,eicall,call,ret,
+                reti,cpse,cp,cpc,cpi,sbrc,sbrs,sbic,sbis,brbs,brbc,breq,
+                brne,brcs,brcc,brsh,brlo,brmi,brpl,brge,brlt,brhs,brhc,
+                brts,brtc,brvs,brvc,brie,brid,mov,movw,ldi,lds,ld,ldd,st,
+                sts,std,lpm,elpm,spm,in,out,push,pop,lsl,lsr,rol,ror,asr,
+                swap,bset,bclr,sbi,cbi,bst,bld,sec,sen,cln,sez,clz,sei,cli,
+                ses,cls,sev,clv,set,clt,seh,clh,break,nop,sleep,wdr},%
+morekeywords=[2]{method,X,Y,Z,r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,
+                r15,r16,r17,r18,r19,r20,r21,r22,r23,r24,r25,r26,r27,r28,r29,
+                r30,r31,tccr3a,tccr3b,tcnt3h,tcnt3l,ocr3ah,ocr3al,ocr3bh,
+                ocr3bl,icr3h,icr3l,etimsk,etifr,pcmsk1,pcmsk0,clkpr,sreg,
+                sph,spl,ucsr1c,ubrr1h,eimsk,gimsk,gicr,gifr,timsk,tifr,
+                spmcr,emcucr,mcucsr,tccr0,tcnt0,ocr0,sfior,tccr1a,tccr1b,
+                tcnt1h,tcnt1l,ocr1ah,ocr1al,ocr1bh,ocr1bl,tccr2,assr,icr1h,
+                icr1l,tcnt2,ocr2,wdtcr,ubrrhi,ucsroc,ubrroh,eearh,eearl,
+                eedr,eecr,porta,ddra,pina,portb,ddrb,pinb,portc,ddrc,pinc,
+                portd,ddrd,pind,spdr,spsr,spcr,udr0,udr,ucsr0a,usrucsr0b,ucr,
+                ubrr0,ubrr0l,ubrr,acsr,porte,ddre,pine,osccal,udr1,ucsr1a,
+                ucsr1b,ubrr1,ubrr1l,com3a1,com3a0,com3b1,com3b0,foc3a,foc3b,
+                wgm31,wgm30,icnc3,ices3,wgm33,wgm32,cs32,cs31,cs30,icf3,
+                ocf3a,ocf3b,tov3,pcint15,pcint14,pcint13,pcint12,pcint11,
+                pcint10,pcint9,pcint8,pcint7,pcint6,pcint5,pcint4,pcint3,
+                pcint2,pcint1,pcint0,CLKPCE,CLKPS3,CLKPS2,CLKPS1,CLKPS0,INT1,
+                INT0,INT2,PCIE1,PCIE0,IVSEL,IVCE,INTF1,INTF0,INTF2,PCIF1,PCIF0,
+                TOIE1,OCIE1A,OCIE1B,OCIE2,TICIE1,TOIE2,TOIE0,OCIE0,TOV1,OCF1A,
+                OCF1B,OCF2,ICF1,TOV2,TOV0,OCF0,SPMIE,RWWSB,ASB,RWWSRE,ASRE,
+                BLBSET,PGWRT,PGERS,SPMEN,SM0,SRL2,SRL1,SRL0,SRW01,SRW00,SRW11,
+                ISC2,SRE,SRW,SRW10,SE,SM,SM1,ISC11,ISC10,ISC01,ISC00,JTD,SM2,
+                JTRF,WDRF,BORF,EXTRF,PORF,FOC0,WGM00,PWM0,COM01,COM00,WGM01,
+                CTC0,CS02,CS01,CS00,TSM,XMBK,XMM2,XMM1,XMM0,PUD,PSR2,PSR10,PSR1,
+                PSR0,COM1A1,COM1A0,COM1B1,COM1B0,FOC1A,FOC1B,PWM11,WGM11,PWM10,
+                WGM10,ICNC1,ICES1,CTC11,WGM13,CTC10,WGM12,CTC1,CS12,CS11,CS10,
+                FOC2,WGM20,PWM2,COM21,COM20,WGM21,CTC2,CS22,CS21,CS20,AS2,
+                TCN2UB,OCR2UB,TCR2UB,WDTOE,WDCE,WDE,WDP2,WDP1,WDP0,EERIE,EEMWE,
+                EEWE,EERE,PORTA7,PORTA6,PORTA5,PORTA4,PORTA3,PORTA2,PORTA1,PORTA0,
+                DDA7,DDA6,DDA5,DDA4,DDA3,DDA2,DDA1,DDA0,PINA7,PINA6,PINA5,PINA4,
+                PINA3,PINA2,PINA1,PINA0,PORTB7,PORTB6,PORTB5,PORTB4,PORTB3,PORTB2,
+                PORTB1,PORTB0,DDB7,DDB6,DDB5,DDB4,DDB3,DDB2,DDB1,DDB0,PINB7,PINB6,
+                PINB5,PINB4,PINB3,PINB2,PINB1,PINB0,PORTC7,PORTC6,PORTC5,
+                PORTC4,PORTC3,PORTC2,PORTC1,PORTC0,DDC7,DDC6,DDC5,DDC4,
+                DDC3,DDC2,DDC1,DDC0,PINC7,PINC6,PINC5,PINC4,PINC3,PINC2,
+                PINC1,PINC0,PORTD7,PORTD6,PORTD5,PORTD4,PORTD3,PORTD2,
+                PORTD1,PORTD0,DDD7,DDD6,DDD5,DDD4,DDD3,DDD2,DDD1,
+                DDD0,PIND7,PIND6,PIND5,PIND4,PIND3,PIND2,PIND1,PIND0,
+                PORTE2,PORTE1,PORTE0,DDE2,DDE1,DDE0,PINE2,PINE1,PINE0,
+                RXC,TXC,UDRE,FE,OR,U2X,RXC0,TXC0,UDRE0,FE0,OR0,DOR0,
+                PE0,U2X0,MPCM0,RXC1,TXC1,UDRE1,FE1,OR1,DOR1,PE1,U2X1,
+                MPCM1,SPIE,SPE,DORD,MSTR,CPOL,CPHA,SPR1,SPR0,SPIF,WCOL,SPI2X,
+                RXCIE,TXCIE,UDRIE,RXEN,TXEN,CHR9,UCSZ2,RXB8,TXB8,RXCIE0,TXCIE0,
+                UDRIE0,RXEN0,TXEN0,CHR90,UCSZ02,RXB80,TXB80,RXCIE1,TXCIE1,
+                UDRIE1,RXEN1,TXEN1,CHR91,UCSZ12,RXB81,TXB81,URSEL0,UMSEL0,
+                UPM01,UPM00,USBS0,UCSZ01,UCSZ00,UCPOL0,URSEL1,UMSEL1,UPM11,
+                UPM10,USBS1,UCSZ11,UCSZ10,UCPOL1,ACD,AINBG,ACBG,ACO,ACI,ACIE,
+                ACIC,ACIS1,ACIS0,BLB12,BLB11,BLB02,BLB01,XL,XH,YL,YH,ZL,
+                ZH,RAMEND,EEPROMEND,FLASHEND,SMALLBOOTSTART,SECONDBOOTSTART,
+                THIRDBOOTSTART,LARGEBOOTSTART,BOOTSTART,PAGESIZE,INT0addr,
+                INT1addr,INT2addr,PCINT0addr,PCINT1addr,TIMER3CAPTaddr,
+                TIMER3COMPAaddr,TIMER3COMPBaddr,TIMER3OVFaddr,TIMER2COMPaddr,
+                TIMER2OVFaddr,TIMER1CAPTaddr,TIMER1COMPAaddr,TIMER1COMPBaddr,
+                TIMER1OVFaddr,TIMER0COMPaddr,TIMER0OVFaddr,SPISTCaddr,
+                USART0RXCaddr,USART1RXCaddr,USART0UDREaddr,USART1UDREaddr,
+                USART0TXCaddr,USART1TXCaddr,EE_RDYaddr,ANA_CMPaddr,
+                SPM_RDYadd,mcucr,ubrr0h,ucsr0c,ucsr0b},%
+morekeywords=[3]{var,org,def,equ,db,include,dseg,cseg,eseg},%
+sensitive=f,%
+morecomment=[l];,%
+}[keywords,comments,strings]%
+
+%% para cargar codigo en assembler
+\lstset{language=Wollok, % AVR 8-bit Assembler
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=\color{Blue}\bf, % Instructions in blue, bold
+        keywordstyle=[2]\color{Orange}, % Registers and ports in orange
+        keywordstyle=[3]\color{Purple}, % Directives in purple
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small,
+        tabsize=3, % 3 spaces per tab
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=1 % Line numbers go in steps of 5
+        }
+%++++++++++++++++++++++++++++++++++
+\lstset{literate=
+  {¡}{{!`}}1  {¿}{{¿`}}1
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\EUR}}1 {£}{{\pounds}}1  {Ω}{{\Omega}}1 {ñ}{{\~n}}1
+}
+
+
+\definecolor{cadet}{rgb}{0.33, 0.41, 0.47}
+\definecolor{orange}{rgb}{0.93, 0.53, 0.18}
+\definecolor{carminered}{rgb}{1.0, 0.0, 0.22}
+\definecolor{green}{rgb}{0.33, 0.42, 0.18}
+\definecolor{darkmagenta}{rgb}{0.55, 0.0, 0.55}
+
+ 	
+\lstset{ frame=Ltb,
+     framerule=0pt,
+     aboveskip=0.5cm,
+     framextopmargin=3pt,
+     framexbottommargin=3pt,
+     framexleftmargin=0.4cm,
+     framesep=0pt,
+     rulesep=.4pt,
+     backgroundcolor=,
+     rulesepcolor=\color{black},
+     %
+     stringstyle=\ttfamily\color{carminered},
+     showstringspaces = false,
+     basicstyle=\small\ttfamily,
+     commentstyle=\itshape\bfseries\color{cadet},
+     keywordstyle=\bfseries\color{darkmagenta},
+     identifierstyle=,
+     %        
+     numbers=left,
+     numbersep=15pt,
+     numberstyle=\tiny,
+     numberfirstline = false,
+     breaklines=true,
+}
+%++++++++++++++++++++++++++++++++++
+
+\usepackage{hyperref}
+\sisetup{separate-uncertainty}% para tener el +/- con los (); ejemplo 33(2)
+
+% Paquete para insertar archivos en PDF
+\usepackage[final]{pdfpages}

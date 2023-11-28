@@ -1,4 +1,4 @@
-import wollok.game.*
+import wollok.game.* //Biblioteca de Wollok Game
 import bomberman.*
 import cajas.*
 import rivales.*
@@ -6,22 +6,22 @@ import menues.*
 
 object juego 
 {
-	const musicamenu = game.sound("./assets/sounds/music-menu.mp3")
-	var estaMenu = true
-	var spawnRivales = false
-	var property rivales = [	
-										new Rival(position = game.at(5,5)),
+	//Atributos
+	const musicamenu			=	game.sound("./assets/sounds/music-menu.mp3")
+	var estaMenu				=	true
+	var spawnRivales			=	false
+	var property rivales 		=	[	new Rival(position = game.at(5,5)),
 										new Rival(position = game.at(7,5)),
 										new Rival(position = game.at(5,7)),
 										new Rival(position = game.at(7,7)),
-										boss											
-							]
-	const velocidadDeRivales = 1500
-	var property jugadores = []
+										boss									]
+	const velocidadDeRivales 	=	1000
+	var property jugadores		=	[]
 	
+	//Metodos
 	method inicializar()
 	{
-		game.addVisual(background)
+		game.addVisual(background)	//Muestra el fondo
 		zonaDeJuego.generarMapa()
 		zonaDeJuego.generarCajas()
 		game.addVisual(menu)
@@ -54,7 +54,7 @@ object juego
 		game.width(15)
 		game.height(15)
 		self.inicializar()
-		game.schedule(500, {musicamenu.play()})
+		game.schedule(5000, {musicamenu.play()})
 		game.start()
 	}
 	
@@ -109,7 +109,7 @@ object juego
 		jugador1.iniciarPropiedades()
 		jugador1.muestraVida()
 		keyboard.space().onPressDo({jugador1.ponerBomba()})
-//		game.onCollideDo(jugador1,{elemento => elemento.matar(jugador1)})
+		game.onCollideDo(jugador1,{enemigo => enemigo.matar(jugador1)})
 		game.onCollideDo(jugador1,{powerUp => powerUp.efecto(jugador1)})
 	}
 	
@@ -124,33 +124,37 @@ object juego
 		jugador2.iniciarPropiedades()
 		jugador2.muestraVida()
 		keyboard.shift().onPressDo({jugador2.ponerBomba()})
-//		game.onCollideDo(jugador2,{elemento => elemento.matar(jugador2)})
+		game.onCollideDo(jugador2,{enemigo => enemigo.matar(jugador2)})
 		game.onCollideDo(jugador2,{powerUp => powerUp.efecto(jugador2)})
 	}
 	
 }
 
 object jugador1 inherits Bombardero (	position = game.at(1,1),
-													image = "./assets/bomberman1/bomberman1frente.png",
-													num = "1",
-													posVidas = game.at(2,14)	){}
+										image = "./assets/bomberman1/bomberman1frente.png",
+										num = "1",
+										posVidas = game.at(0,14)	)
+{}
 
 object jugador2 inherits Bombardero (	position = game.at(13,13),
-													image = "./assets/bomberman2/bomberman2frente.png",
-													num = "2",
-													posVidas = game.at(9,14) ){}
+										image = "./assets/bomberman2/bomberman2frente.png",
+										num = "2",
+										posVidas = game.at(11,14) )
+{}
 
 object zonaDeJuego
 {
-	var property posicionesOcupadas = []
-	var property posicionesOcupadasCajas = []
-	var property posicionesNoRemovibles = []
+	var property posicionesOcupadas			=	[]
+	var property posicionesOcupadasCajas	=	[]
+	var property posicionesNoRemovibles		=	[]
 	
-	method agregarPos(posicion){
+	method agregarPos(posicion)
+	{
 		posicionesOcupadas.add(posicion)
 	}
 	
-	method sacarPos(posicion){
+	method sacarPos(posicion)
+	{
 		posicionesOcupadas.remove(posicion)
 	}
 	
@@ -162,7 +166,8 @@ object zonaDeJuego
 		posicionesOcupadasCajas.remove(posicion)
 	}
 	
-	method sePuedeRomper(posicion){
+	method sePuedeRomper(posicion)
+	{
 		return !posicionesNoRemovibles.contains(posicion)
 	}
 	
@@ -172,9 +177,10 @@ object zonaDeJuego
 		posicionesOcupadasCajas.contains(posicion)
 	}
 	
-	method reiniciarPosiciones(){
-		posicionesOcupadas = []
-		posicionesOcupadasCajas = []
+	method reiniciarPosiciones()
+	{
+		posicionesOcupadas 		= 	[]
+		posicionesOcupadasCajas = 	[]
 	}
 	
 	method generarMapa()
@@ -196,8 +202,8 @@ object zonaDeJuego
 		
 	}
 
-	
-	method generarCajas(){
+	method generarCajas()
+	{
 		const entornoJugador1 = [game.at(1,1), game.at(1,2),game.at(2,1)]
 		const entornoJugador2 = [game.at(13,13), game.at(13,12), game.at(12,13)]
 		const entornoEnemigos = [game.at(5,5), game.at(5,7), game.at(7,5), game.at(7,7)]

@@ -1,9 +1,0 @@
-import wollok.game.*
-import juego.*
-import rivales.*
-
-//Inicia Wollok Game
-program iniciar 
-{ 
-	juego.jugar()
-}

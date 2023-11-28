@@ -41,8 +41,8 @@ class Rival {
 
 }
 
-object boss inherits Rival(position = game.at(5,5),image = "./assets/rivales/bossfrente.png"){
-	
+object boss inherits Rival(position = game.at(5,5),image = "./assets/rivales/bossfrente.png")
+{
 	var property vidas = 5	
 	
 	override method moverse(posicion){
@@ -78,7 +78,7 @@ object boss inherits Rival(position = game.at(5,5),image = "./assets/rivales/bos
 	}
 	method muestraVida(){
 		const vidasAMostrar = new MostrarVidas(
-			position = game.at(5,0),
+			position = game.at(5,14),
 			image = "./assets/corazones/bossvida" + self.vidas().toString() + ".png"
 		)
 		game.addVisual(vidasAMostrar)

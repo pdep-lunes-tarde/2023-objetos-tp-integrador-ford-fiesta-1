@@ -1,0 +1,7 @@
+import wollok.game.*	//Biblioteca de Wollok Game
+import juego.*			//Biblioteca de Juego
+
+program iniciar 		//Inicia el programa Bomberman utilizando Wollok Game
+{ 
+	juego.jugar()		//Llama al metodo jugar del objeto juego
+}
